@@ -1,0 +1,1182 @@
+Networking
+=============================
+Topics Covered :
+1. Different routing protocals
+2. VLAN
+
+Books:
+https://vaibhav2501.wordpress.com/wp-content/uploads/2012/02/tcp_ip-protocol-suite-4th-ed-b-forouzan-mcgraw-hill-2010-bbs.pdf
+
+
+Usefull sites : 
+
+>> 1. https://www.interviewbit.com/networking-interview-questions/#network-type-classification
+>> https://www.scaler.com/topics/course/free-computer-networks-course/video/1311/
+>> https://www.javatpoint.com/subnetting-in-computer-networks
+
+
+
+
+
+Questions
+=======================
+>> 1. What is VPN ??
+VPN or the Virtual Private Network is a private WAN (Wide Area Network) built on the internet. It allows the creation of a secured tunnel (protected network) between different networks using the internet (public network). By using the VPN, a client can connect to the organization’s network remotely. 
+
+>> 2. What are private address ??
+Private Address: For each class, there are specific IPs that are reserved specifically for private use only. This IP address cannot be used for devices on the Internet as they are non-routable.
+
+IPv4 Class	Private IPv4 Start Address	Private IPv4 End Address
+A	10.0.0.0	10.255.255.255
+B	172.16.0.0	172.31.255.255
+C	192.168.0.0	192.168.255.255
+Special Address: IP Range from 127.0.0.1 to 127.255.255.255 are network testing addresses also known as loopback addresses are the special IP address.
+
+>>3. Difference between router and Gateway
+ router is mainly used in the local area network(LAN) and wide area network(WAN) domain. The data is transferred across the network by using the routing protocols. A router communicate between same type of protocals.
+
+ In networking, a gateway is a device or software component that acts as an entry point to another network. It serves as an interface between different networks, facilitating communication between devices that are part of different networks using different protocols.
+
+ 4. TCP Vs UDP
+===============================
+1. Connection-Oriented(Reliability) vs. Connectionless:
+
+>> TCP is connection-oriented, meaning it establishes a connection between the sender and receiver before transmitting data. It ensures reliable delivery of data by acknowledging received packets, retransmitting lost packets, and sequencing packets in the correct order.
+>> UDP is connectionless, meaning it does not establish a connection before transmitting data. Each datagram (packet) is sent independently, without any guarantee of delivery or order. UDP does not provide mechanisms for error detection, retransmission, or sequencing.
+
+2. Header Overhead:
+
+>> TCP has a larger header overhead compared to UDP. TCP headers include fields for sequence numbers, acknowledgment numbers, checksums, window sizes, and other control information, which contribute to higher overhead.
+
+>> UDP has a smaller header overhead compared to TCP. UDP headers include fewer fields, consisting mainly of source and destination port numbers and length information, resulting in lower overhead.
+
+3. Usage:
+>> TCP is commonly used for applications that require reliable, ordered delivery of data, such as web browsing, email, file transfer (FTP), and remote access (SSH).
+
+>> UDP is suitable for applications that prioritize speed and low latency over reliability, such as real-time communication (VoIP), online gaming, streaming media (UDP-based protocols like RTP), and DNS (Domain Name System) queries.
+
+5. 
+
+
+https://www.youtube.com/watch?v=tnndyy8tbME&list=PLoL3y5BaIvw2heBYZd0MSUDsDtZRmbKJa&index=59   === Neil 
+
+=====================================
+Q. When to use Tunk Port ??
+>> A trunk port is an essential networking feature that enables VLAN communication across switches.
+   Connection two switches
+   Connections  a router for inter-valn routing
+   Connecting a VMWare Hyperwiser with multiple VLAN's
+
+>> VLANS
+=====================
+https://www.practicalnetworking.net/stand-alone/vlans/#native-vlan
+
+>> ✅✅ DNS 
+====================
+>> The DNS resolves Full qualified Domain name to an IP address. DNS requests are sent using UDP port  53.
+>> Companies maintain their own DNS servers internally
+
+Host  ---> DNS request ----> Internal DSN server ---> External/global DNS server
+
+>> nslookup amazon.com   --> The nslookup (Name Server Lookup) command is used to query DNS (Domain Name System) servers to obtain domain name or IP address mapping.
+
+>> The protocol that resolves DNS (Domain Name System) queries is the DNS protocol, which operates over:
+✅ UDP (User Datagram Protocol) – Port 53 (Primary)
+✅ TCP (Transmission Control Protocol) – Port 53 (For large queries like zone transfers)
+
+
+>> ✅✅ ARP(Address Resolution Protocal)
+=======================================
+ARP protocal is used to map IP address --> MAC address
+>> ARP replies are stored in ARP cache, so doesnt need to send ARP request every time
+
+>> To view ARP cache
+arp -n or arp -a
+
+>> To clear ARP cache
+ip -s -s neigh flush all
+
+
+✅✅ LLDP
+=================================
+>> LLDP (Link Layer Discovery Protocol) is a layer 2 protocol used for network device discovery. It allows network devices (switches, routers, servers, etc.) to share information about themselves and their neighbors on directly connected links.
+>> Useful commands
+
+show lldp neigbors
+show lldp neighbors detail
+
+
+>> Switch useful Troubleshoot commands
+===================================
+>> show running-config interface Ethernet 22/1
+
+>> show ip interface  brief
+                                                                                            Address
+Interface              IP Address              Status       Protocol                 MTU    Owner
+---------------------- ----------------------- ------------ -------------------- ---------- -------
+Ethernet46/1           unassigned              down         down                    1500
+Management1            10.238.151.100/24       up           up                      1500
+Port-Channel1039       unassigned              down         lowerlayerdown          1500
+Vlan23                 23.1.1.1/24             up           up                      1500
+Vlan26                 5.0.26.2/24             up           up                      1500
+
+
+>> spk-ptt-leaf-7260cx3-64-2#show interfaces Ethernet 14/1    >> check port speed, if any miss-match Traffic wont flow
+
+
+✅✅ Packet travesre between two hosts using a router
+============================================================
+
+Host A ---- Router   ---- Host B
+
+1. ICMP (using ping) creates a echo request
+2. ICMP  hands over to-- > IP protocal ---> create packet(IP source, destIp, payload)
+3. IP check dest Ip in same subnet or different .
+4. If its remote network ---> needs to send to default gateway
+5. Ip should know default gateway MAC address
+6. IP ---> check ARP chache for , entry for router ---> ARP broadcast 
+7. Make a Frame with MAC address and send to L2.
+    Dest MAC, Src MAC, Ether type field, packet, FCS
+8. frame ---> handed over to Layet1 (Physical layer)
+9. Every Host in collision domain --> receivies the bits and check CRC --> if CRC  does not = FCS (frame discarded) else 
+    if CRC matches --> check MAC address matches --> Ether type field checked to check protocal 
+10. Packet pulled from the frame ---> packet is handed over to protocal listed in frame (IP)
+11. IP --> check dest IP address --> check routing table ---> to find the ethernet interface details
+12. 
+=============================================================
+
+✅✅ Layer -2 Frame breakdown
+=========================================================
+  
+  Dest MAC address | Src MAC address | Ether type | Payload | FCS
+
+
+  >> Ether type : Identifies protocal (IPV4, IPV6. ARP --etc)
+  >> FCS : frame check sequence , CRC checksum for error detection
+
+
+✅✅ Routing
+===========================================
+>> Router functions
+     >> Determine the best path rom available netweorks
+     >> Forward the traffic to those networks
+
+@@@ Default Routers : Use defualt routinng on only stub networks - those with only one exit path out of the network.
+   >> ip route 0.0.0.0 0.0.0.0 10.1.5.1(next Hop address)
+   >> ip classless
+
+   >> show ip route
+   S* 0.0.0.0/0 [1/0] via 10.1.5.1   ---> default route
+
+
+@@@ 1) Directly connected routes
+>> spk-ptt-leaf-7260cx3-64-2#show ip route
+ S        0.0.0.0/0 [1/0] via 10.238.151.254, Management1
+
+ C        1.1.1.0/24 is directly connected, Vlan1048
+ C        1.1.2.0/24 is directly connected, Vlan1052
+ C        3.3.6.0/24 is directly connected, 
+
+@@@ 2> Static Router
+>>  An admin can directly add an static route to the destination or router can learn using router protocal
+>> @@@ ip route <destination_network> <subnet_mask> <next_hop_IP or exit_interface
+
+>> Command to verify route
+   show ip route
+
+@@@ 3> Dynamic Routers
+>> Dynamic Routing automatically learns and updates routes between networks using routing protocols. Unlike Static Routing, which requires manual configuration, Dynamic Routing protocols allow routers to communicate and update routes as the network topology changes.
+
+  >> Two classes of Routing protocals
+  ✅✅ Distance Vector : Find best path to remote network by judging distance. The route with least hop count is determined as best route. eg : RIP, IGRP
+
+  ✅✅ Link State: also called shortest path first protocal, it maintians 3 tables
+       >> 1 table : directly connected neighbors
+       >> 2nd table : topology of entire network
+       >> 3rd table : routing table
+
+       eg: OSPF, IP
+       
+  >> Routing Protocal Types:
+Dynamic routing protocols are classified into two main categories:
+
+✅✅ 1. Interior Gateway Protocols (IGP)
+Used within an Autonomous System (AS) (e.g., inside a company's network).
+
+🔹 Distance Vector Protocols (RIP, EIGRP)
+🔹 Link-State Protocols (OSPF, IS-IS)
+
+✅✅2. Exterior Gateway Protocols (EGP)
+Used to route traffic between Autonomous Systems (AS) (e.g., between ISPs).
+
+🔹 Border Gateway Protocol (BGP)
+
+
+✅  To check which protocal enabled on ROuter
+show ip protocals
+
+✅  RIP : In RIP (Routing Information Protocol), the metric is used to determine the best path to a destination network. The metric used in RIP is "Hop Count".
+
+🔹 Hop Count represents the number of routers a packet must pass through to reach its destination.
+🔹 The fewer hops, the better the route.
+🔹 If multiple paths exist, RIP selects the route with the lowest hop count.
+🔹 The maximum hop count in RIP is 15. If a destination requires 16 hops or more, it is considered unreachable.
+
+✅  EIGRP : Enhanced Interior Grateway Protocal ) is a distance vector protocal
+ 🔹 
+
+
+
+✅  OSPF : 
+In OSPF (Open Shortest Path First), the metric used to determine the best route is called "Cost".
+🔹 OSPF Cost = Reference Bandwidth / Interface Bandwidth
+🔹 Lower cost = Better path
+🔹 By default, the reference bandwidth is 100 Mbps
+
+✅  IS-IS :
+🔹 The default metric in IS-IS is "10" per interface.
+🔹 Unlike OSPF, IS-IS does not automatically consider bandwidth in its metric calculation.
+🔹 Metrics can be manually assigned to interfaces to influence path selection.
+
+
+✅✅ Administrative Distance: 
+🔹 Administrative Distance (AD) is a value (0-255) used by routers to select the most trustworthy route when multiple routes to the same destination exist from different routing protocols.
+
+Lower AD = Higher Trust
+Higher AD = Lower Trust
+AD helps routers prioritize routing protocols when multiple paths exist
+
+🔹 Connected Interface - 0 -   Most Trusted
+   Static Route    1  - High
+   EIGRP (Internal)    90 - Medium
+   OSPF    110 - Medium
+   IS-IS   115 - Medium
+   RIP 120 - Low
+   EIGRP (External)    170 - Lower
+   Unknown Route   255 - Untrusted (Never used)
+
+=======================================================
+
+✅✅ LoopBack Interface: 
+
+🔹 Loopback interfaces are logical interfaces. They allow you to assign IP address to a router or L3 Switch.
+🔹 They dont need any physical interface, because they are logical they never fail
+🔹 The loopback are commonly used for the router, where traffic terminate on the router itself
+🔹 To identify router using router ID
+
+🔹 Create a Loopback Interface and Assign an IP
+   Router(config)# interface loopback 0
+   Router(config-if)# ip address 192.168.1.1 255.255.255.255
+   Router(config-if)# exit
+🔹
+🔹 127.0.0.1 Localhost (Self-ping & testing)
+   ::1 (IPv6)  IPv6 equivalent of 127.0.0.1
+
+🔹 192.168.1.1/32  Custom loopback for router ID
+========================================================
+
+✅✅ Ping & Trace route
+
+🔹 Ping check host is reachable or not by using ICMP protocal
+
+🔹 Trace route uses ping to find the path to reach destination
+🔹 Trace route uses TTL to avaoild unnessary flooding
+===========================================================
+
+✅✅ OSPF:
+
+🔹 OSPF is a Link state routing protocal.
+🔹 Messages are sent using Multicast.
+🔹 In OSPF every router learns the full picture of network including every router, iterfaces and what they connected to
+🔹 OSPF uses Link state Advertisemnt to pass the routing info to other routers
+========================================================
+
+✅✅ VLAN:
+
+🔹 Switch works at Layesr-2. By default switch broadcast the traffic every where. WHich raises performace concerns.
+
+✅ VALAN Access port:
+     🔹 VLAn access ports are configured at the edge devices are plugged in.
+     🔹 Configuration
+      >> Sw1 (config) # vlan 10
+      >> Sw1 (config)
+      >> Sw1 (config) # interface Ethernet 12/1
+      >> Sw1 (config) # switchmode mode access
+      >> Sw1 (config) # switchport access vlan 10
+      >> Sw1 (config) # show vlan brief
+
+✅ VLAN Trunk Port:
+     >> Trunk port configured btween the switchs
+     >> Sw1 (config) # interface Ethernet 12/1
+      >> Sw1 (config) # switchmode mode trunk
+      >> Sw1 (config) # switchport trunk vlan 10
+      >> Sw1 (config) # show vlan brief
+
+✅ Natuve VLAN:
+     >> On a trunk port if switch receives any untagged traffic, switch needs to know which VLAN can be assigned.
+     >> BY default switch assign VLAN1 for untagged traffic 
+
+
+✅✅ VLAN Trunking Protocal(VTP)
+🔹 It manages the addition, deletion, and renaming of VLANs.
+🔹 VLAN information is shared between switches without manual configuration on each device.
+🔹 Prevents mismatched VLAN configurations across switches.
+🔹 Reduces Administrative Overhead
+
+📌 📌  VTP Modes
+A switch can be configured in one of three VTP modes:
+
+Mode        Function
+=======     ===========
+Server  - Default mode.
+- Can create, delete, and modify VLANs.
+- Advertises VLANs to other switches.
+- Stores VLAN information in NVRAM.
+
+Client  - Cannot create, delete, or modify VLANs.
+- Synchronizes VLAN configuration from VTP servers.
+- Stores VLAN information in RAM (not NVRAM).
+
+Transparent - Does not participate in VTP updates.
+- Allows manual VLAN configuration.
+- Forwards VTP messages without modifying them.
+
+✅✅ VTP Pruning
+🔹 VTP Pruning is used to reduce unnecessary VLAN traffic on trunk links by only forwarding VLAN data to switches that need it.
+VTP pruning helps optimize bandwidth usage.
+>> Switch(config)# vtp pruning
+
+
+✅✅ Dynamic Trunking Protocal (DTP)
+
+🔹 Using DTP automatically configures Trunk link between two switches.
+🔹 DTP Config:
+   >> switchport mode dynamic auto : Will form a Trunk if the neighbour switch port is set to "trunk" or "dynamic desiarable" . (Passively will try)
+   >> switchport mode dynamic desirable : Will for a trunk if neighbour switch port is set to "trunk" or " dynamic auto" .(Actively tries for Trunk connection)
+   >> switchport nonegotiate : Disable DTP
+
+
+✅✅ Inter VLAN Routing
+
+🔹 Inter VLAN routing is required to allow communication between different VLANS.
+🔹 A router or Layer 3 switch is required to route traffic between different VLANS.
+
+🔹 Method1 : Router with seperate interfaces:(old approach)
+   >> Uses separate physical interfaces for each VLAN.  
+   >> Not scalable; used in older networks.
+   >> Config on Router
+   >> Router 
+             # interface FastEthernet 0/1 (seperate interface for VLAn 10)
+             # ip address 10.10.10.1/24 
+
+             # interface FastEthernet 0/2 (seperate interface for VLAn 20)
+             # ip address 10.10.20.1/24 
+
+    >> Switch # interface FastEthernet 0/1
+              # switchport mode access
+
+🔹 Method 2 : Router on a Stick 
+   >> Uses one physical interface with subinterfaces for each VLAN.
+   >> We do need a seperate physical interface for every VLAn. 
+   >> There is more contention of bandwidth because we use single interface for all VLAN communication.
+   >> Config on Router
+   >> Router # interface FastEthernet 0/1
+             # no ip address
+
+             # interface FastEthernet 0/1.10 (sub interface 1)
+             # encapsulation dot1q 10   (Vlan 10)
+             # ip address 10.10.10.1/24 
+
+             # interface FastEthernet 0/1.20 (sub interface 2)
+             # encapsulation dot1q 20  (Vlan 20)
+             # ip address 10.10.20.1/24 
+
+    >> Switch # interface FastEthernet 0/1
+              # switchport mode trunk
+
+
+ 🔹 Method 3 : Layer 3 Switch (Doing routing on switch itself)
+    >> Creates a virtual interface (SVI{Switch Virtual interface}) for each VLAN to enable routing.
+    >> This is the best method for large network inter VLAn communication.
+
+    >> Config on Switch:
+    >> switch # ip routing
+              # vlan 10
+              # inteface vlan 10             (Switch Virtual Interface for VLAN 10)
+              # ip address 10.10.10.1/24   
+
+              # vlan 20
+              # inteface vlan 20             (Switch Virtual Interface for VLAN 20)
+              # ip address 10.10.20.1/24
+
+              >> Inorder to communicate switch to outside world(WAN), we needs to configure Router as well
+        Switch # interface FatsEthernet 0/1
+               # ip address 10.10.100.1/24
+               # ip route 0.0.0.0 0.0.0.0 10.10.100.2
+
+        Router # interface FastEthernet 0/1
+               # ip address 10.10.100.2/24 
+               # interface FastEthernet 0/2
+               # ip address 203.0.113.1/24
+
+               >> Add route to VLAN network and WAN
+               # ip route 10.10.0.0 255.255.0.0 10.10.100.1
+               # ip route 0.0.0.0 0.0.0.0 203.0.113.2 
+
+
+
+
+
+========================================================
+
+✅✅ DHCP  (Dynamic Host Configuration Protocal)
+
+🔹 DHCP is a client/server protocal that automatically provides a Host with IP and other details like default gateway and subnet mask.
+🔹 Rather than manullay configuring IP, DHCP get the details from DHCP server.
+🔹 DHCP Client : Best examples are PC's and laptops. They wont bother with change in IP address using DHCP.
+                 >> We cant configure routers and switch with DHCP. 
+
+🔹 DHCP Server : 1. DHCP server configuration on a CISCO router
+                 >> ip dhcp excluded-address 192.168.10.1, 192.169.10.10 (Exclude imp address which cant be used)
+
+                 >> Create DHCP pool
+                 >> ip dhcp pool LAN 
+                 >> netwoek 192.168.10.0/24
+                 >> default-router 192.168.10.1
+                 >> dns-server 8.8.8.8 
+                 >> lease 7
+
+                 2. External DHCP server
+
+========================================================
+
+✅✅ STP(Spanning Tree Protocal)
+
+🔹 At Layer3 loops can be avoided by using Routing protocal and TTL as part of IP header.
+🔹 Layer 2 loops can be avoided by using STP.
+🔹 STP does it by detecting potential loops and blocking ports to prevent them.
+🔹 Spanning tree automates failovers as well as performing loop prevention.
+🔹 Legacy spanning tree take 50 sec for converge.
+
+🔹🔹🔹🔹 Spanning tree port modes
+
+🔹 Blocking : A blocked port won’t forward frames; it just listens to BPDUs. The purpose of the blocking state is to prevent the use of looped
+paths. All ports are in blocking state by default when the switch is powered up.
+
+🔹 Listening:  The port listens to BPDUs to make sure no loops occur on the network before passing data frames. A port in listening state prepares to forward data frames without populating the MAC address table.
+
+🔹Learning:  The switch port listens to BPDUs and learns all the paths in the switched network. A port in learning state populates the MAC address table but still doesn’t forward data frames. Forward delay means the time it takes to transition a port from listening to learning mode
+(or from learning to forwarding mode), which is set to 15 seconds by default and can be seen in the show spanning-tree output.
+
+🔹 Forwarding:  The port sends and receives all data frames on the bridged port. If the port is still a designated or root port at the end of the learning state, it enters the forwarding state.
+
+
+
+🔹🔹🔹🔹 Convergence : occurs when all ports on bridges and switches have transitioned to either forwarding or blocking modes. No  data will be forwarded until convergence is complete.  It usually takes 50 seconds to go from blocking to forwarding mode,
+
+🔹🔹 🔹🔹 How STP works
+   >> Switch send BPDU(Bridge Protocal Data Unit) to identify near by switch and potential loops.
+   >> The switch will not forward any traffic until it is certain about any port is loop free.
+
+   >> Step1 : Determine Root Bridge : selected based on switch bridge ID. Lowest the bridge priority ID selected 
+   >> Step2 : All ports on Root bridge are selected as Designated Ports.
+   >> Step3 : Determine Root ports on the other switches (lowest cost to root bridge)
+   >> Step4 : Ports on the other side of those links are Designamted ports.
+   >> Step5 : On the links which are left are Blocking ports.(Higest cost to root bridge)
+
+
+   >> When switch calculate its best path towards root bridge, it selects highest bandwidth links.
+
+   >> Root port : Each switch's exit interface on the lowest cost path to the root bridge is selected as its root port.
+
+🔹🔹 Spanning Tree versions:
+   🔹 STP : Original implementation and it takes high convergance time.
+
+   🔹RSTP : Rapid STP, improved convergance time but does not support load balancing.
+
+   🔹MSTP : Multiple STP, Enables grouping and mapping VLANS into different spanning tree protocals. Supports load balancing.
+
+
+
+📌 STP Enhancements Comparison Table
+===========================================
+
+Feature                 Purpose                                                         Applied To  Effect
+=========               ==========                                                      =====================
+Port Security           Prevents unauthorized MAC addresses Access ports                Limits MACs per port, protects network
+PortFast                Enables instant forwarding  Access ports (not trunks)           Bypasses STP delays (0-1 sec)
+BPDU Guard              Protects against rogue switches PortFast ports                  Shuts down the port if a BPDU is received
+BPDU Filter             Stops BPDU transmission PortFast ports                          Blocks BPDUs (can cause loops)
+UplinkFast              Fast uplink failover    Edge switches                           Switches root port instantly (1-3 sec)
+BackboneFast            Detects indirect link failures                                  Core/distribution switches  Bypasses 20-sec max age delay
+
+
+
+=============================================================
+
+✅✅ EtherChannel Introduction(Link Aggregation)
+
+📌 To configure static MAC address
+>> S1#config t
+S1(config)#mac-address-table static aaaa.bbbb.cccc vlan 1 int fa0/5
+S1(config)#do show mac address-table
+Mac Address Table
+-------------------------------------------
+Vlan Mac Address Type Ports
+---- ----------- -------- -----
+All 0100.0ccc.cccc STATIC CPU
+[output cut]
+1 0002.1762.b235 DYNAMIC Po1
+1 0009.b79f.c080 DYNAMIC Po1
+1 000d.29bd.4b87 DYNAMIC Po1
+
+
+
+
+
+🔹 Ehterchannel is link aggregation protocal, which combines, multiple physical cables/links to single logical link to increase performance, bandwidth and to provide redundency between switches, routers and servers.
+
+🔹 Terminology:
+   >> Ether channel also called as
+      >> Port-channel
+      >> Link aggregation
+      >> A link bundle
+
+🔹 Ether Channel load balancing:
+   >> Etherchannels provides redundency and load balancing, if a link fails the flow will be load balanced to the remaning links.
+
+🔹 Ether channel protocals:
+   🔹🔹 LACP link aggregation protocal :
+       >> In this method switches on both sides negotiate the port channel creation and maintanance.
+       >> Recommended
+
+    🔹🔹 PAgb protocal (CISCO proprietory protocal):
+       >> In this method switches on both sides negotiate the port channel creation and maintanance.
+       >> Not recommended every where
+
+    🔹🔹 Static Etherchannel :
+       >> The switches do not negotiate the port channel creation and maintance.
+       >> But the settings must match on both sides, to create channel group.
+
+    🔹🔹🔹🔹🔹🔹 LACP configuration (Layer-2)
+    >> switch # interface 12/1,13/1
+    >> switch # channel-group 1 mode active           >> This command creates port-channel 1
+    
+    >> switch # interface port-channel 1
+    >> switch #switchport mode trunk                  >> This command sets port-channel to trunk mode
+
+    🔹🔹🔹🔹🔹🔹 LACP configuration (Layer-3)
+
+    >> switch # interface 12/1,13/1
+    >> switch # no switchport
+    >> switch # channel-group 1 mode active/on/passive/desirable/auto
+
+    >> switch # interface port-channel 1
+    >> switch # ip address 192.168.1.10/24
+    >> switch # no shutdown
+
+
+=============================================================
+
+✅✅ Access layer Switch Security Introduction
+There are 3 mrthods available
+🔹 DHCP Snooping
+🔹 Dynamic ARP Inspection
+🔹 802.1x Indentiy Based Networking
+🔹 Port Security
+
+
+
+
+🔹🔹🔹🔹🔹🔹 1) DHCP Snooping
+>> Its a Layer-2 security feature, which is used to protect the switch network from rogue(dishonest) DHCP server and DHCP-based attacks.
+>> It acts as a firewall between untrusted hosts and DHCP servers by filtering DHCP messages.
+
+>> DHCP Configuration
+Switch(config)# ip dhcp snooping
+Switch(config)# ip dhcp snooping vlan 10,20    >> Enable DHCP snooping at VLAN level
+
+Switch(config)# interface GigabitEthernet0/1    >> Mark Trsted port 
+Switch(config-if)# ip dhcp snooping trust
+Switch(config-if)# exit
+
+Switch# show ip dhcp snooping  >> To verify the configuration
+
+✅ DHCP Snooping → Used to build the trusted MAC-IP mapping.
+
+
+🔹🔹🔹🔹🔹🔹 2) Dynamic ARP Inspection
+>> Dynamic ARP Inspection (DAI) is a security feature that helps protect networks from ARP spoofing attacks by verifying ARP packets. It works in conjunction with DHCP Snooping to ensure only legitimate ARP requests and replies are allowed on the network.
+
+>> Prevents man-in-the-middle (MITM) attacks.
+Stops IP spoofing by verifying MAC-IP mappings.
+Protects network integrity by ensuring only legitimate ARP packets are forwarded.
+
+>> How DAI Works
+Validates ARP Packets:
+
+Checks if the MAC-IP pair in an ARP packet matches the DHCP Snooping Binding Table.
+Drops ARP packets with invalid or spoofed addresses.
+
+
+🔹🔹🔹🔹🔹🔹 802.1x Indentiy Based Networking
+>> With this method only authenticated users can able to access switch port
+>> When user enters valid username an dpassword , the switch port transitions to a normal access port in the releavent VLAN.
+
+
+🔹🔹🔹🔹🔹🔹 Port Security
+>> It enable admin to specify which MAC address or addresses can able to send traffic to specific ports.
+
+>> This can be used to lock down particulat port for specific hosts.
+
+>> Switch(config)# interface range f0/1 - 24
+Switch(config)# switchport mode access
+Switch(config)# switchport port-security
+
+✅  With port security default max MAC address allowed 1 and port mode is Shutdown
+
+>> To increase max allowed max addresses on a port
+>> Switch(config)# switchport port-security maximum 2
+
+>> manually allowing mac address on switch port
+>> Switch(config)# switchport port-security mac-address 1111.2222.3333.4444
+
+================================================================
+
+✅✅ Access Control Lists
+
+🔹 Access Control list is used to apply set of rules to network traffic either to allow or deny the packets based on IP address, protocal and port number. 
+🔹 ACLs are commonly used by routers, switches, firewalls to enhace security and traffic control flow.
+
+
+>> Use Cases of ACLs:
+🔹  Traffic Filtering: Restrict access to a network or subnet.
+🔹  Security: Block malicious IPs or unauthorized users.
+🔹  Quality of Service (QoS): Prioritize specific traffic.
+🔹  Network Address Translation (NAT): Define specific rules for translation.
+
+>> ACL types
+🔹 Standard
+🔹 Extended
+🔹 Named
+
+🔹🔹🔹🔹 Standard ACL :
+ >> Standard ACL filters traffic only based on "source IP address"
+ >> Uses ACL numbers between 1-99 and 1300-1999
+
+ >> Allow specific subnet and deny others
+ Router(config)# access-list 10 permit 192.168.1.0 0.0.0.255
+Router(config)# access-list 10 deny any
+Router(config)# interface GigabitEthernet0/0
+Router(config-if)# ip access-group 10 in
+Router(config-if)# exit
+
+>> Block specific IP address
+Router(config)# access-list 15 deny 192.168.1.100
+Router(config)# access-list 15 permit any
+Router(config)# interface GigabitEthernet0/1
+Router(config-if)# ip access-group 15 out
+Router(config-if)# exit
+
+>> Allow a Range of IPs and Deny Others
+Router(config)# access-list 20 permit 192.168.10.0 0.0.0.63
+Router(config)# access-list 20 deny any
+
+🔹🔹🔹🔹 Extended ACL :
+>> Extended ACL is more advance type and filters traffic based on Source Ip, Port, Protocal, Destination IP, Direction(inbound, outbound)
+
+>>ACL uses 100-199, 2000-2699
+📌📌 Syntax : access-list <ACL_number> {permit | deny} <protocol> <source> <source_wildcard> [operator <port>] <destination> <destination_wildcard> [operator <port>]
+
+>> Example 1: Allow Only SSH Traffic from a Specific Network
+Router(config)#  access-list 100 permit tcp 192.168.1.0 0.0.0.255  192.168.2.0 0.0.0.255 eq 22
+Router(config)#  access-list 110 deny ip any any
+
+>> Example 2 : Block HTTP & HTTPS Traffic but Allow Everything Else
+Router(config)# access-list 120 deny tcp any any eq 80
+Router(config)# access-list 120 deny tcp any any eq 443
+Router(config)# access-list 120 permit ip any any
+
+
+🔹🔹🔹🔹 Named ACL :
+>> You can now refere ACL by name instead of number
+>> It begin with command "ip access-list"
+
+📌📌 Syntax for Named ACLs
+ip access-list {standard | extended} <name>
+{permit | deny} <protocol> <source> <source_wildcard> [operator <port>] <destination> <destination_wildcard> [operator <port>]
+
+>> Example: 1 Standard Named ACL (Allow/Block Specific Source IPs)
+Router(config)# ip access-list standard BLOCK_NETWORK
+Router(config-std-nacl)# deny 192.168.1.0 0.0.0.255
+Router(config-std-nacl)# permit any
+Router(config-std-nacl)# exit
+
+
+🔹🔹🔹🔹 ACL Operation:
+>> ACLs are applied at interface level with access-group command
+>> You can have max of one rule for a interface per each direction
+>> You can have both inbound and outbound ACL on the same interface but not 2 2 inbound or 2 outbound per interface
+>> To configure inbound/outbound traffic
+Router(config)# interface GigabitEthernet0/1
+Router(config-if)# ip access-group 15 out
+Router(config-if)# ip access-group 14 in
+
+📌📌 Implicit Deny All
+>> There is an implicit deny any any rule at bottom of the ACL's
+>> If an ACL is not applied to an interface , all traffic is allowed,
+>> If an ACL is applied, all traffic is denied except what is explicitly allowed
+
+eg : Router(config)# access-list 1 permit 10.10.10.0 0.0.0.255  ---> traffic 10.10.10.0/24 allowed , everything else denied
+
+📌📌 Explicit Permit ALl
+>> If an ACL is applied all traffic denied except what is explicitly allowed
+eg : Router(config)# access-list 1 deny 10.10.10.0 0.0.0.255
+    Router(config)#  access-list 1 permit any
+
+======================================================================
+Network Address Translation
+
+🔹🔹 NAT is a technique used in networkig to modify the IP address info in IP header while packet is in transit.
+
+🔹🔹Types of NAT
+    >> Static NAT
+    >> Dynamic NAT
+    >> PAT(Port Address Translation)
+
+🔹🔹 Statis NAT : It is a permanent one-to-one mapping between a private and public IP address. Used for servers which must accept incoming connections.
+
+🔹🔹 Dynamic NAT : Maps a private IP to a public IP dynamically from a pool.Used when internal devices need external access but don’t require a fixed IP.
+
+🔹🔹 PAT : Maps multiple private IPs to a single public IP using different port numbers.The most common type, used in home routers and ISPs.
+    >> The router tracks translations by IP address and layer 4 port number
+
+
+🔹🔹 📌📌 STatic NAT Config:
+Router(config)#  int f0/0
+Router(config)# ip nat outside
+
+Router(config)# int f1/0
+Router(config)# ip nat outside
+
+Router(config)# ip nat inside source static 10.1.1.10 203.0.113.3
+
+>> show ip nat translation
+
+🔹🔹 📌📌 Dynamic NAT Config:
+    >> Configure pool of global address
+    Router(config)# ip nat pool Flakbox 203.0.113.4 203.0.113.14 255.255.255.240
+
+    >> Create an access list with reference the internal IP address we want to transalte
+    Router(config)#access-list 1 permit 10.0.2.0 0.0.0.255
+
+    >> Associate NAT access list to Pool 
+    Router(config)# ip nat inside source list 1 pool Flakbox
+
+📌📌 claer ip nat translation * ---> Will remove all NAT transalation
+
+🔹🔹 📌📌 How PAT Works - Step-by-Step
+    1. A private device sends a request to the internet
+    Example: A computer with private IP 192.168.1.10 wants to access a website at 8.8.8.8:80.
+
+    2. Router modifies the source IP and port
+
+    3. The router replaces 192.168.1.10 with its own public IP, e.g., 203.0.113.5, and assigns a unique port number.
+
+    Example:
+    Private IP: 192.168.1.10 → Public IP: 203.0.113.5:10001
+    Private IP: 192.168.1.11 → Public IP: 203.0.113.5:10002
+
+    4. The request is sent to the destination server
+
+    5. The request now appears to come from 203.0.113.5:10001 instead of 192.168.1.10.
+
+    6. The server responds to the public IP and port
+       The website 8.8.8.8 sends a reply back to 203.0.113.5:10001.
+
+    7. Router translates the response back to the private IP
+
+    8. The router checks its PAT table, finds the matching private IP (192.168.1.10), and forwards the response.
+
+    🔹🔹 PAT config:
+    >> Configure pool of global address
+    Router(config)# ip nat pool Flakbox 203.0.113.4 203.0.113.6 netmask 255.255.255.240
+
+    >> Create an access list with reference the internal IP address we want to transalte
+    Router(config)#access-list 1 permit 10.0.2.0 0.0.0.255
+
+    >> Associate NAT access list to Pool 
+    Router(config)# ip nat inside source list 1 pool Flakbox overload
+
+
+    =======================================================================
+    Wide Area Network (WAN)
+
+    🔹🔹 VPN (Virtual Private Networks)
+       >> VPN provides a private tunnel between private networks across a shared public network such as internet.
+       >> Traffic travelling trhough tunnel is encrypted and only readble ny the authorised users only on both side.
+
+
+    📌📌 Site-to-site VPN : 
+      >> Software does not rewuired for this type.
+      >> VPN connections are terminateda at router or firewall in each office.
+      >> IP Sec is typically used for encryption.
+   
+   📌📌 Remote Access VPN : 
+      >> VPN software is installed at individual user's device.
+      >> The user can aceess VPN from any where with internet connectivity
+      >> Uses SSL for encryption
+
+    🔹🔹 Primary WAN connectivity options :
+
+      >> Leased lines : Point-to-Point or Private connections can be used. 
+      >> MPLS (Multiprotocol Label Switching)
+         Type: Provider-managed, virtual private network.
+
+
+    ============================================================================
+    Security Threat
+
+    🔹🔹 Common Attacks
+       >> 📌📌 Social ENgineering : is the deception to manipulate personal and confidential info
+       >> 📌📌 Phishine : Phishing is a social engineering attack , where the attacker pretends to be from a reputation comanpany to get confidential info like credit card number/ phone number
+          Phishining EMAILS
+
+        >> 📌📌 Data exfiltration : Where data leaves from organization without authorization.
+
+        >> 📌📌 DOS ATTACK (Denial of Service Attack)
+            >> TCP Syn flood
+
+        >> 📌📌 Spoofing  : Spooking where attackers fake their identity
+               >> MAC address spoofing
+               >> Ip address spoofing
+               >> Application server spoofing (rougue DHCP server)
+
+        >> 📌📌 Reflection and Amplification attack
+               >> The attacker spoof's the victim's source address
+
+        >> 📌📌 Man in the middle attack
+              >> In thi , attack inserts/modify the data in between two legitimate hosts.
+              >> ARP spoofing is well known for man in the middle attack
+
+        >> 📌📌 Password attacks
+
+        >> 📌📌 Buffer overflow attack:
+
+        >> 📌📌 Packet sniffers : If the attacker has compromised a target system, or inserted themself in the network, Packet sniffers such as Wireshark can be used to read .write packets
+
+
+    🔹🔹 Firewall, IDS, IPS
+
+        >> 📌📌 IDS : Intrusion Detection System
+        >> 📌📌 IPS : Intrusion Prevention System
+
+        >> IDS sits along with the traffic flow, and infoems security admin of any potential concers
+        >> IDS has the capability to inform Firewall to stop attacks.
+
+        >> IPS sits along with the traffic flow and can block attacks.
+
+        >> 📌📌 IPS Vs Firewall
+        >> IPS uses signature to inspect packets at Layer 7 , looking for traffic packets which matches attack.
+
+        >> Firewall blocks or allow traffic based on rules such as Dest IP, port number.
+
+    🔹🔹  Cryptography 
+        Is a science of protecting information by transforming it into a secure format(ENcryption)
+
+        To ensure
+        >> Privacy
+        >> Integrity
+        >> Authenticity
+        
+        >> 📌📌 Symmetric ENcryption : Uses same key to encrypt and decrypt the key
+             >> Algorithems used : AES, DES
+        >> 📌📌 ASymmetric ENcryption : Uses Public and Private key combination
+                >> Data encrypted with public key, can able to decrypt only with private key and vice versa
+                >> Algorithems used : RSA, ECDSA
+
+        >> 📌📌 HMAC Hash based message authentication codes :
+           >> HMAC codes provides data integrity
+           >> Algorithems used : MD5, SHA
+
+
+
+        >> 📌📌 TLS (Transport Layer Security)
+            Step 1: Client Hello (TLS version, random number, supported cipher suites.)
+
+            Step 2 : Server Hello(Choosen cipher suite, TLS certificate(contains public key), random number)
+
+            Step 3 : Authentication
+                  >> Client verifies Server certificate by using certificate authority
+
+            Step4 : Session key generation
+                  >> Client generate a temp key
+                  >> Encrypt using Server's public key
+                  >> Send it
+
+            Step5 : Key Derivation
+                >> Both client and server use the same temp key + the two random numbers to derive the session key
+
+            Step 6 : Secure Communication
+                >> Now using symmetric session key all the communication happens
+
+
+        ⚙️ Technologies Used in TLS
+            RSA / ECDSA – Public-key encryption for exchanging the session key
+
+            AES / ChaCha20 – Symmetric encryption for actual data
+
+            SHA-256 – Hashing for integrity
+
+    
+    🔹🔹 Remote Access VPN
+    📌 How It Works — Step by Step:
+        1. User Starts VPN Client
+            A software (like Cisco AnyConnect, OpenVPN, or Windows built-in VPN) is installed on the device.
+
+        2. Authentication
+            The VPN client prompts for username/password or certificates.
+            Optional: MFA (multi-factor authentication) for extra security.
+
+        3. Secure Tunnel Created
+            Once authenticated, a secure encrypted tunnel is established between the user and VPN gateway (server).
+
+        4. Access Internal Resources
+            The remote user can now access:
+            Internal file shares
+            Intranet
+            Databases
+            Internal apps (like Jira, Confluence, SAP)
+
+    🔹🔹 DDOS Attack (Distributed Denial Of Service)
+
+    >> A DDoS (Distributed Denial of Service) attack is a malicious attempt to disrupt the normal traffic of a targeted server, service, or network by overwhelming it with a flood of internet traffic.
+
+    >> The attacker uses multiple systems (often infected with malware) to generate huge volumes of traffic.
+
+    >> These systems are often part of a botnet — a network of compromised computers or IoT devices.
+
+    >> The target server or network becomes overwhelmed, slowing down or crashing completely.
+
+    =========================================================================
+    🔹🔹 AAA (Autehntication, Autherization, Accounting)
+
+    🔐 What Is an AAA Server?
+        An AAA server is a system that provides three essential functions:​
+
+        >> Authentication: Verifies the identity of users or devices attempting to access the network.
+
+        >> Authorization: Determines the permissions or privileges assigned to the authenticated user or device.
+
+        >> Accounting: Tracks the consumption of network resources by users or devices, often for auditing or billing purposes.​
+
+        Common protocols used by AAA servers include:​
+
+        🔹🔹 RADIUS (Remote Authentication Dial-In User Service): Widely used for network access control, especially in wireless and VPN environments.
+
+        🔹🔹 TACACS+ (Terminal Access Controller Access-Control System Plus): Often used for device administration, providing more granular control over authorization and accounting.
+
+    🔐 1. LDAP (Lightweight Directory Access Protocol)
+
+    ✅ Purpose:
+        LDAP is used to query and modify directory services like user accounts, groups, and access permissions. It is typically used in enterprise environments for central user authentication.
+
+    ✅ Use Case:
+        Centralized user directory (e.g., Active Directory).
+
+        Applications like email servers, VPNs, and intranets querying user credentials.
+
+    🔐 2. RADIUS (Remote Authentication Dial-In User Service)
+
+    ✅ Purpose:
+        RADIUS is a client-server protocol used to authenticate and authorize users, and optionally, account for their usage.
+
+    ✅ Use Case:
+        Authenticating users on Wi-Fi, VPNs, and network devices (Cisco, Juniper).
+
+        Logging how long a user was connected (Accounting).
+
+    ✅ Authentication Flow:
+        User connects to a Wi-Fi network.
+
+        Wi-Fi controller sends credentials to the RADIUS server.
+
+        RADIUS verifies them and sends back an Accept or Reject.
+
+        Logs the session duration for billing or auditing (if accounting is enabled).
+
+    🔐 3. TACACS (Terminal Access Controller Access-Control System)
+    ✅ Purpose:
+        TACACS, specifically TACACS+, is used for device management—offering separate control for authentication, authorization, and accounting (AAA).
+
+    ✅ Use Case:
+        Network admins accessing Cisco routers or switches.
+
+        More granular control over what commands a user can run.
+
+    🧠 Summary Table
+    Protocol        Use Case                            Port                Encryption              Typical Use
+    LDAP            Directory access & login            389                 Password only           AD authentication, lookups
+    RADIUS          Network access, accounting          1812                Password only           VPN, Wi-Fi login
+    TACACS+         Admin access with command control   49                  Full encryption         Cisco CLI access
+
+
+    =============================================================
+    SNMP (SImple Network Management Protocal)
+
+    >> SNMP manager can collect and organize information from SNMP Agent, which is SNMP software which runs and manage devices such as routers and switches.
+
+    VELOS  --- > SNMP Manager
+    (device)
+
+        >> SNMP manager can pull the info from device, or
+        >> device can push it to server(trap)
+
+     ✅ MIB (Management Information Base)
+     >> Data variables on SNMP system are organized in MIB's.
+     >> The SNMP Manager and Agent needs to share same MIB, so that they can which variables reported on.
+
+    ✅ SNMP Versions
+     >> SNMPV1 : uses plain test to authenticate between mnager and agent
+     >> SNMPV2c : It also used plain test, but it supports buld retrieval
+     >> SNMPV3: Support stron autnetication and encryption 
+
+     📊 Comparison: NMS(SNMPv2-based Network Management System) v2 vs SIEM (Security Information and Event Management)
+     Feature NMS v2  SIEM
+     Focus                      Network performance & availability          Security event monitoring & analysis
+     Data Collected             SNMP traps, device metrics                  Syslog, Windows logs, application logs
+     Protocol                   SNMP v2                                      Syslog, API, Agents
+     Real-Time Monitoring       Yes                                          Yes
+     Alerting                   Based on device status thresholds           Based on threat intelligence & correlation
+     Data Storage               Device health history                       Log archives for compliance and forensics
+     Use Cases                  Uptime, bandwidth, CPU, memory usage        Threat detection, incident response
+
+
+     ======================================================================
+     QOS (Quality Of Service)
+
+     >> QoS (Quality of Service) is a set of techniques and mechanisms used in networking to manage and prioritize network traffic, ensuring that critical or latency-sensitive applications (like voice, video, or real-time data) receive the bandwidth and performance they need.
+
+     ✅ Imp workds:
+        >> Bandwidth  : Maximum rate of data transfer
+        >> Latency : Delay between source and destination
+        >> Jitter  : Variation in packet arrival time
+
+     ✅ Why QoS is Important:
+        >>In networks, all traffic is treated equally by default. When congestion happens, QoS ensures that high-priority traffic (like VoIP or live video) is not delayed or dropped, while less critical data (like file downloads or emails) may be slowed down or queued.
+
+    🎯 Goals of QoS:
+    >> Prioritize traffic (e.g., VoIP > web browsing)
+    >> Minimize delay for time-sensitive data
+    >> Reduce jitter in streaming/voice communication
+    >> Avoid packet loss for critical applications
+    >> Control bandwidth usage based on policy
+
+
+    ✅ QOS Techniques:
+    🎯  Classification and Marking :
+       >> For a router or switch to give particular level of service to a traffic , it has to recognize the type of traffic first
+
+       >> Common way to recognize traffic are
+         >> 1. COS (Class of Service)
+                >> Layer 2 service
+                >> There is a 3 bit field in 802.1q frame header which is used to carry COS , QOS marking
+                >> IP phone signalling calla QOS value = 3
+                >> Voice = 5
+         >> 2. DSCP(Differenciated Serice Code Point)
+                >> Layer 3 service
+                >> 6 bits are used in IP header -->4 possible combination
+                >> IP phone signalling calla QOS value = 24 (CS3)
+                >> Voice = 46(EF)
+         >> 3. Access Control List(ACL)
+                >> ACS can rexognize traffic based on Layer 2 and Layer3 info
+         >> 4. NBAR(Network based application recognition)
+                >> NBAR is used to recognise traffic based on layer 3 to layer 7 info
+
+
+    🎯  Congetion Management:
+       >> Queing is used manage congestion on routers and switches
+       >> CBWFQ(Class Based Weighted Fair Queing)
+       >> LLQ(Low latency queing)
+
+    🎯  Modular QOS CLI:
+       >> Class Map  >> which defines the traffic to take an action on
+       >> Plocy Map  >> Take the action on the traffic
+       >> Serice policy applies the policy to an interface
+
+    🎯 🎯 Configuration
+
+        >> class-map match-any VOICE
+           match ip dscp ef
+
+           policy-map PRIORITY-VOICE
+           class VOICE
+           priority 1000   # Guaranteed bandwidth
+
+           interface GigabitEthernet0/1
+           service-policy output PRIORITY-VOICE
+
+    ✅  QOS traffic shaping and policying
+
+    >> QOS can alos be used to control trafic rate
+    >> Traffic shaping buffers any excess traffic so the overall traffic stays within desired limit
+    >> Traffic policying drops or re-,arks excess traffic to rnforce the specified limit
+    
+    
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+                 
+
+
+
+
+
+
+
+
+
+
+
+
