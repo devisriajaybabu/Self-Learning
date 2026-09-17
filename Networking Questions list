@@ -1,0 +1,125 @@
+Networking Questions list
+==================================
+https://www.youtube.com/watch?v=hzkleGAC2_Y&list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ&index=75
+https://www.youtube.com/watch?v=4C6eeQes4cs&list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ&index=73
+
+
+
+What is a computer network?
+What are the advantages of networking computers?
+Differentiate between LAN, MAN, and WAN.
+What is the OSI model? Can you explain its layers?
+What is TCP/IP? How does it relate to the OSI model?
+Explain the difference between TCP and UDP.
+What is an IP address?
+What is subnetting? Why is it used?               =============== read 
+What is a router? How does it differ from a switch?
+What is DNS? How does it work?
+What is DHCP?
+Explain the concept of NAT (Network Address Translation).
+What is a firewall?
+What is a proxy server?
+What is the purpose of ARP (Address Resolution Protocol)?
+What is a VLAN (Virtual LAN)?
+What is the difference between a hub, a switch, and a router?
+What is ICMP? What are some of its uses?
+Explain the difference between IPv4 and IPv6.
+What is a subnet mask?
+What is the purpose of a MAC address?
+What is a packet?
+What is a gateway in networking?
+What is SSL/TLS?
+What is the purpose of a default gateway?
+
+
+
+
+Topics
+==========================
+OSI Model & TCP/IP Model
+✅ IPv4 & IPv6 Addressing and Subnetting  -- done
+✅ MAC Address, ARP, ICMP
+✅ VLANs and Trunking (802.1Q)    -- Done
+✅ Broadcast, Multicast, and Unicast
+✅ Collision & Broadcast Domains
+✅ Network Address Translation (NAT)
+✅ DHCP (Dynamic Host Configuration Protocol)
+✅ DNS (Domain Name System)     -- Done
+✅ Wireless Basics (SSID, WPA, WPA2, Channels)
+
+📌 Recommended Lab: Cisco Packet Tracer VLAN Configuration
+
+2️⃣ Routing & Switching
+✅ Cisco CLI (Command-Line Interface) Basics
+✅ VLANs, Trunks, and VTP
+✅ Spanning Tree Protocol (STP, RSTP)
+✅ Inter-VLAN Routing
+✅ Static Routing & Dynamic Routing Protocols
+
+RIP (Routing Information Protocol)
+OSPF (Open Shortest Path First)
+EIGRP (Enhanced Interior Gateway Routing Protocol)
+✅ First Hop Redundancy Protocols (HSRP, VRRP, GLBP)
+📌 Recommended Lab: Configuring OSPF and VLANs in GNS3
+
+3️⃣ IP Services
+✅ ACL (Access Control Lists) - Standard & Extended
+✅ NAT (Network Address Translation)
+✅ DHCP Server & Relay Configuration
+✅ SNMP (Simple Network Management Protocol)
+✅ Syslog & Logging
+✅ NTP (Network Time Protocol)
+✅ QoS (Quality of Service) Basics
+
+📌 Recommended Lab: Configuring ACLs in Packet Tracer
+
+4️⃣ Network Security
+✅ Secure Shell (SSH) & Telnet
+✅ Port Security (MAC Address Filtering)
+✅ Switch Security - BPDU Guard, Root Guard
+✅ AAA (Authentication, Authorization, Accounting)
+✅ VPN Fundamentals (IPsec, GRE)
+✅ Firewalls & Cisco ASA Basics
+✅ Wireless Security (WPA2, 802.1X, RADIUS)
+
+📌 Recommended Lab: Securing SSH on Cisco Switches
+
+5️⃣ Automation & Network Management
+✅ Cisco SD-WAN, SD-Access Basics
+✅ REST APIs for Network Automation
+✅ Python for Network Engineers
+✅ Ansible, Netmiko, Paramiko
+✅ Introduction to DevNet & Programmability
+
+📌 Recommended Lab: Automating Cisco Routers with Python
+
+6️⃣ Troubleshooting & Simulation Tools
+✅ Cisco Packet Tracer - Beginner-friendly labs
+✅ GNS3 - Advanced network simulations
+✅ EVE-NG - Enterprise-level network emulation
+✅ Wireshark - Packet capture analysis
+✅ Ping, Traceroute, Telnet, SSH for network troubleshooting
+
+📌 Recommended Lab: Analyzing Packets with Wireshark
+
+🔹 How to Study with David Bombal?
+1️⃣ YouTube: Free videos explaining concepts with labs
+2️⃣ Udemy Courses: CCNA 200-301, Network Automation
+3️⃣ Website (davidbombal.com): Hands-on labs & challenges
+4️⃣ Cisco Packet Tracer & GNS3 Labs: Practice CLI commands
+5️⃣ Follow CCNA Official Blueprint & take mock exams
+
+🔹 Useful Resources
+📌 David Bombal’s YouTube Channel: Click Here
+📌 Cisco Official CCNA Exam Guide: Click Here
+📌 Packet Tracer Download: Click Here
+
+Would you like specific CCNA lab exercises or practice questions? 😊
+
+
+
+
+
+
+
+
