@@ -1,1 +1,540 @@
+AI By Devi Module1
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+Module 1 : https://www.youtube.com/watch?v=mnkiYN6qikw&list=WL
+
+Function Calling / Tool Calling (core concept)
+Semantic Kernel (especially if using Microsoft/Copilot ecosystem)
+LangChain basics
+LangGraph (important for enterprise agents)
+Vector Databases + RAG
+CrewAI / AutoGen (multi-agent frameworks)
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+
+✅>> Introduction to Generative AI
+🔹 🔹 Generative AI is branch of AI which is used to generate new content, images, videos, test, code by using of exisiting patterns and relationships.
+🔹 🔹  Generative AI is a AI capable system that can imagine and create new things which does not exisit.
+
+✅>> AI Super powers
+🔹 1. Based on test EX: Chat GPT, Gemini...etc
+🔹 2. Based on Images Ex> Mid Egn
+🔹 3. Based on Audio
+🔹 4. Based on Videos
+🔹 5: Based on Code Ex: GitHub Copilot
+
+✅ >> AI Tools
+🔹 1. Nural Networks
+🔹 2. LLM
+🔹 3. Generrative adversarial networks (GAN)
+🔹 4. Variational auto encoders (VAE)
+🔹 5. Foundational models
+
+
+✅✅ >> Prompt Engineering
+🔹 1. Role
+🔹 2. Instructions
+🔹 3. Content
+🔹 4. Input format
+🔹 5. Output format
+
+🔹🔹🔹 Prompt engineering Tips
+1. Set the context
+2. Speciify the role
+3. Short examples
+
+
+✅ ✅ ✅ ✅  In F5 we use  GitHub Copilot Native instead of Langchain, because
+
+🔹 GitHub Copilot can directly access workspace contectn ex: doc/, text/ config/ and understand the project context
+🔹 The agent can invoke the configured connector.
+🔹 GitHub Copilot manages context automatically.
+🔹 Multi-step reasoning
+
+
+✅ ✅ LangChain  -- Build agents
+🔹 LangChain is a opensource framework for building applications powered by LLM models like ChatGPT
+🔹 it helps connect AI models with LLM, Tools, API, database, and business workflows
+🔹  With LangChain we can build agent with any model provider like chatGPT, Gemini, Anthropic..etc of our choice
+Copilot UI
+   │
+   ▼
+LangChain Agent Layer
+   │
+   ├── Authentication
+   ├── Tool Selection
+   ├── Memory
+   ├── Prompt Templates
+   │
+   ▼
+Enterprise Connectors
+   │
+   ├── Jira
+   ├── Confluence
+   ├── Bugzilla
+   ├── GitHub
+   ├── Azure DevOps
+   ├── Jenkins
+   └── Databases
+   │
+   ▼
+LLM (GPT-4o / Azure OpenAI)
+
+✅ ✅ LangGraph - maintain/control agent
+🔹 We can control every step of custom agent with low-level orchestration, memory and human-in support 
+
+✅ ✅ LangSmith -- Tracing and debugging AI agent
+
+🔹 Tracing and Debugging
+🔹 Monitoring
+🔹 Evalution and testing
+🔹 Deployemnt and agent builder
+
+✅ ✅  How LLM's are trained
+
+🔹 pre-training
+	🔹🔹 Bulk Data ---> Filtered to get clean data --> Tokenizer converts to Tokens and token Id's --> Embedding layer --> Vectors
+	🔹🔹 Embedding works on the semantics(meanings) of the tokens and creates a vector database   
+🔹 Super Vised Fine tuning (SVF)
+🔹 Reinforcement learning from the human feed back
+🔹 inference
+
+
+✅ ✅ AI agents tokens cost in production
+
+🔹1. Creativity - 
+🔹2. Effort - reasoning
+🔹3. Layout  - while wriitng large prompts --> follow the "U" curve rule  --> Long prompts ofeten get attention at the begining and the end.
+     - Put important and criitcal things in the begining
+     - Repeat the critical rules again in the enc
+     - Burying/put the import stuff or rules in the middle of prompt would not get more attention
+
+✅ ✅  LLM types
+
+🔹 Closed source  --> Chat GPT, Clause, Gemini
+🔹 Open source --> we can download the source code package and run the model on our own hardware
+   >> ex: LLAMA, Deep Seek,QWEN
+
+ 🔹 Larger context windows --- > Best Gemini
+ 🔹 Best code base , intelligence, speed  --- > GPT , claude
+
+
+✅ ✅  LLM type selection categories
+
+🔹 Layer1 : Cost  -- High volumes easy task --> Open source modesl LLAMA, DeepSeek, Qwuen
+
+🔹 Layer2 : Quality  --> High intelligence and reasoning --> GPT, cluade, Gemini, Deepseek Pro
+
+🔹 Layer3 : Speed  --> Groq hosted , Flash, Haiku tiers
+
+🔹 Layer4 : Context  --> GPT, cluade, Gemini, Deepseek Pro
+
+AI By Devi Module2 & Module 3
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+Module 2 
+--  Prmpt Engineering
+--- Context Engineering
+
+Module 3
+--- RAG
+   --- Section 1: RAG Architecture
+   --- Section 2 : Why Naive RAG Breaks
+   --- Section 3 : Agentic RAG
+   --- Section 4 : Chunk Enrichment
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+
+
+✅  When w egive a prompt in the UI , backgrond process 
+
+User
+  │
+  ▼
+Web UI / Mobile App
+  │
+  ▼
+API Gateway
+  │
+  ▼
+Authentication & Authorization
+  │
+  ▼
+Prompt Processing Layer
+  │
+  ├─ Input Validation
+  ├─ Content Safety Check
+  ├─ Prompt Template Creation
+  └─ Context Assembly
+  │
+  ▼
+LLM Orchestrator
+  │
+  ├─ Retrieve Chat History
+  ├─ Retrieve Memory
+  ├─ RAG/Search
+  ├─ Tool Selection
+  └─ Model Routing
+  │
+  ▼
+LLM Inference Engine (GPU)
+  │
+  ▼
+Post Processing
+  │
+  ├─ Output Safety Check
+  ├─ Formatting
+  ├─ Citations
+  └─ Response Validation
+  │
+  ▼
+Streaming Response
+  │
+  ▼
+User UI
+
+
+✅ ✅ ✅  5 -Part Prompt Framework
+
+🔹 1. Skeleton
+     >>🔹 1. ROle
+     >>🔹 2. Context
+     >>🔹 3. Task
+     >>🔹 4. Output Format
+     >>🔹 5. Length
+
+
+🔹 2. Constraints
+     >> 🔹 1. Dont use any emojis in the output
+     >> 🔹 2. DOnt do un-nessary pleasing 
+
+🔹 3. Few-shot example
+
+🔹 4. Decomposition -- Divide the task into smalled steps
+
+🔹 5. Interview me to get answers from user
+
+
+
+✅ ✅ ✅  Context Engineering
+>> As an AI Engineer, it's useful to think of Prompt Engineering as "writing good instructions" and Context Engineering as "designing the entire information environment around the model."
+
+>> Context windows contains below 6 important things
+
+🔹1. User prompt
+
+🔹2. System prompt
+
+🔹3. Tools
+
+🔹4. Resources
+
+🔹5. Assistant history
+
+🔹6. Tool-call history
+
+             +----------------+
+             |  User Request  |
+             +-------+--------+
+                     |
+                     v
+        +---------------------------+
+        | Context Engineering Layer |
+        +---------------------------+
+          |      |      |      |
+          |      |      |      |
+       Memory  RAG   Tools  History
+          |      |      |      |
+          +------+--+---+------+
+                    |
+                    v
+              LLM Context
+                    |
+                    v
+                Response
+
+
+
+✅ ✅ ✅   RAG  ✅ ✅ ✅ 
+
+>> RAG - 🔹 Retrievla Arguement Generation
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+🔹 🔹 🔹  Section1 : RAG Architecture
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+🔹 1. Indexing
+
+		>> 1. Chunking    ---> Divide the whole document into multiple small chunks 
+		>> 2. Embedding   ---> chunks [Text] --> Tokens --> using vectors --> convert to embedding
+		>> 3. vector database ---> To store embeddings 
+		     >> Ex : Chroma DB, Pine cone, milus
+
+
+🔹 2. Retrieval
+		When user ask a Question 
+
+		Q  ---> converts Q to embedding (Use similr embedding technique)  ---> try to seach in the vector database for top 5 cosine similarities for embeddings  ---> pass it to LLM ---> output
+
+
+					┌──────────────┐
+                    │ Data Sources │
+                    └──────┬───────┘
+                           ↓
+                    ┌──────────────┐
+                    │ Data Ingest  │
+                    └──────┬───────┘
+                           ↓
+                    ┌──────────────┐
+                    │ Chunking     │
+                    └──────┬───────┘
+                           ↓
+                    ┌──────────────┐
+                    │ Embeddings   │
+                    └──────┬───────┘
+                           ↓
+                    ┌──────────────┐
+                    │ Vector DB    │
+                    └──────┬───────┘
+                           ↓
+═══════════════════════════════════════
+               Query Time
+═══════════════════════════════════════
+
+User Question
+       ↓
+Query Embedding
+       ↓
+Vector Search
+       ↓
+Relevant Chunks
+       ↓
+Prompt Construction
+       ↓
+LLM
+       ↓
+Answer
+
+
+
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+🔹 🔹 🔹 Step1 : Chunking
+
+
+
+>> Different types of chunking
+
+1. Fixed size chunking
+   >> Fix the number of token for each chunk
+
+2. Fixed size with ovelap
+3. Sentence based chunking
+4. Paragraph based chunking
+5. Recursive chunking
+6. Semanitic Chunking
+
+
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+🔹 🔹 Section2 : Why Naive RAG Breaks 
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+>> 1. A traditional RAG is always looks simple but it has problems
+
+Question
+   ↓
+One Search
+   ↓
+Top-K Documents
+   ↓
+Answer
+
+🔹 Problem 1: Wrong Retrieval
+🔹 Problem 2: No Query Rewriting
+🔹 Problem 3: Wrong K Value , K means number of retrieved documents.
+
+
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+🔹 🔹 Sectionn 3: Agentic RAG
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+Agentic RAG extends traditional RAG by allowing the LLM to act as an agent that can plan, route, retrieve, evaluate, and re-retrieve information before answering. Unlike naive RAG, which performs a single retrieval step, Agentic RAG supports query rewriting, multi-hop retrieval, self-correction, tool usage, routing across data sources, and controlled retrieval loops to improve accuracy and reduce hallucinations.
+
+One-Line Memory Trick
+
+Naive RAG = Search Once → Answer
+
+Agentic RAG = Think → Plan → Search → Verify → Search Again → Answer 🚀
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+    ✅ Agentic RAG works based on tools
+
+		🔹 Do I need retrieval?
+		🔹 Which tool should I call?
+		🔹 What should I search?
+
+		Think
+		↓
+		Search
+		↓
+		Evaluate
+		↓
+		Search again if needed
+		↓
+		Combine Results
+		↓
+		Answer
+
+
+
+		User Question
+		      ↓
+		LLM
+		      ↓
+		Need Search
+		      ↓
+		Tool Call
+		      ↓
+		Search Result
+		      ↓
+		LLM
+		      ↓
+		Final Answer
+
+	✅  Agentic RAG - Query Planning and Rewriting
+
+		🔹 This is where Agentic RAG becomes powerful. A smart agent break down the task into smaller steps 
+		🔹 If requires rewrite the user question to avoid ambiguity
+		🔹 decomposing multi-part questions, multi-hop retrieval across documents
+
+
+	✅  Agentic RAG  - Self correcting retrieval (grade the retrieved chunks, re-query when relevance is low (Corrective RAG, Self-RAG))
+
+		Search
+		 ↓
+		Evaluate Results
+		 ↓
+		Bad?
+		 ↓
+		Search Again
+		 ↓
+		Answer
+
+	✅  Agentic RAG  - Routing — choosing the right collection, index, or tool per query instead of one global vector store
+
+	✅  Agentic RAG  - Loop control — max retrieval steps, latency and token budgets, and falling back to "I don't know" instead of looping forever
+
+
+
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+Section 4 : Chunk Enrichment
+✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ ✅ 
+
+>> What is Chunk Enrichment?
+
+When large documents are split into smaller pieces called chunks, the chunks can be enhanced with additional information before storing them in a search index. This process is called Chunk Enrichment.
+
+Instead of storing only the chunk text, we store:
+
+1. Extracted entities
+2. Key phrases
+3. Metadata
+4. Security information
+5. Redacted content
+
+This makes search and retrieval far more accurate.
+
+
+ 🔹 1. PII Detection and Redaction
+	What is PII? Personally Identifiable Information (PII) is any information that can identify a person.
+
+	Examples: Full Name, Email Address
+
+ 🔹 2. NER (Named Entity Recognition)
+	What is NER?  --> NER identifies important real-world objects mentioned in the text and categorizes them.
+
+  🔹 3. Key-Phrase Extraction
+    What is it?  ---> Key-phrase extraction automatically identifies the most important topics from a document.
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
