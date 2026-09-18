@@ -21,3 +21,13 @@ This architecture separates test logic, equipment access, execution control, res
 🔹 7.An event system would allow plugins for logging, database storage, metrics, notifications, artifact collection, and reporting.
 🔹 8.The framework would support local and remote execution while keeping product-specific communication inside separate client or adapter modules.
 🔹 9.Finally, I would validate the framework with unit, integration, and contract tests so it remains reliable, maintainable, and scalable.
+
+✅✅ Q3 : How a customer SR will be handled ?
+🔹 1. I will try to analyze the criticality/severity of the issue.
+🔹 2. In local system I will try to reproduce the issue.
+🔹 3. I confirm the problem with logs, error details, and reproducible steps.
+🔹 4. I immediately inform stakeholders and create a clearly owned incident record.
+🔹 5. I establish a communication channel and provide customers with regular updates.
+🔹 6. I apply a safe workaround when available to reduce the immediate impact.
+🔹 7. I test the permanent fix carefully before deploying it to production. Perform regression testing around the fixed area
+🔹 8. Finally, I document the root cause, lessons learned, and preventive actions, add a testcase.
