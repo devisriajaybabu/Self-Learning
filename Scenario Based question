@@ -1,1 +1,23 @@
+✅✅ Q1 : Explain about your test framework
+🔹 1. Syzygy is a python based test automation framework used to F5OS applaince devices.
+🔹 2. A test is implemented by a class derived from Testcase --> mornally it containts setup(), run() , teardown()
+🔹 3. A test declares a equipment, services (network, console, labels, platfrom)
+🔹 4. The equipment manager resolves the hardware and and injects it into the test trhough constructor EquipmentInstance()
+🔹 5. Using equipment services like mgmt, power, console, labels we can able to SSH/Telnet to the hardware and execute the commands.
+🔹 6. testtool.py runner loads the configuration , discover tests, resolves equipment, run the lead and saves the tests results in session summary
+🔹 7. Syzygy has a extentions to save the tests session results to database
+🔹 8. Extensions subscribe to framework events to provide logging, database storage, metrics, email notifications, triggers, and artifact handling.
+This architecture separates test logic, equipment access, execution control, result reporting, and integrations, making the framework reusable and scalable.
 
+
+✅✅ Q2 : Explain how you can design a test framework
+🔹 1. I would design a test framework with clear layers for test cases, execution, equipment access, reporting, and configuration.
+🔹 2.Each test would extend a common base class with a predictable lifecycle such as setup, run, and teardown.
+🔹 3. I would use dependency injection so tests receive required services like network, console, database, or REST clients without creating them directly.
+🔹 4. Test suites would be defined in YAML or JSON to control test selection, ordering, repetition, variables, and failure policies.
+🔹 4. A central runner would discover tests, load configuration, resolve dependencies, execute tests, and produce a summary.
+🔹 5. The framework would use structured results such as pass, failure, error, warning, and inconclusive instead of relying only on assertions.
+🔹 6.Reusable conditions and actions would handle comparisons, waiting, retries, cancellation, and session aborts.
+🔹 7.An event system would allow plugins for logging, database storage, metrics, notifications, artifact collection, and reporting.
+🔹 8.The framework would support local and remote execution while keeping product-specific communication inside separate client or adapter modules.
+🔹 9.Finally, I would validate the framework with unit, integration, and contract tests so it remains reliable, maintainable, and scalable.
