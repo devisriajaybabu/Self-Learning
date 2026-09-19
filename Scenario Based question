@@ -31,3 +31,10 @@ This architecture separates test logic, equipment access, execution control, res
 🔹 6. I apply a safe workaround when available to reduce the immediate impact.
 🔹 7. I test the permanent fix carefully before deploying it to production. Perform regression testing around the fixed area
 🔹 8. Finally, I document the root cause, lessons learned, and preventive actions, add a testcase.
+
+✅✅ Q4 : What is your approach to handle flaky tests ?
+🔹 1. Identify the test failure pattern by checking its past test logs, environment and history.
+🔹 2. Classify the failure is due to product, env, test defect, timing issue, dependencies.
+🔹 3. Add precise logging and diagnostic information around the failing step.
+🔹 4. Report a product bug , it is is issue from product side, else
+🔹 5. If it is a test issue, fix the root cause by 
