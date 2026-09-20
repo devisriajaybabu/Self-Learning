@@ -1,1 +1,17 @@
+✅✅ Lang Graph full course
+
+🔹 ✅ Lang chain : It provides toolkit (LLM, RAG, prompts, Memory, Tools, Vector database) for building LLM applications.
+   🔹 LangChain is build for linear step-by-step application.
+
+🔹 ✅ Lang Graph : A workflow engine for building Intelligent AI using using LangChain components.
+   🔹 LangGrapsh is built for complex, circular workflows that requires loops, reties, multi agents colloboration
+
+
+🔹 ✅  Components for LangGraph
+🔹 1. State :  It is a shared memory traverse across the flow chart
+🔹 2. Node : It is a task, can be executed using a plain python function.
+🔹 3. Edge : Connection between nodes
+🔹 4. Conditional edge : Based on conditions select the node
+🔹 5. Stategraph : Like FLow chart
+
 
