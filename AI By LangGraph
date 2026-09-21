@@ -14,4 +14,13 @@
 🔹 4. Conditional edge : Based on conditions select the node
 🔹 5. Stategraph : Like FLow chart
 
+ ✅  How to tun LLM locally ?
+🔹 download ollama package
+🔹 Ollama lets you use open models with your coding agents so you can spend less while keeping your data private.
+
+ ✅ Types of memory in LLM
+🔹 1. Short term memory
+🔹 2. Long term memory : uses external storage
+🔹 3. Editable memory : It allows to add /update/delete store memory
+
 
