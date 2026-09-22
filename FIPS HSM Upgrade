@@ -1,1 +1,216 @@
+>> [root@appliance-1 ~]# cat /etc/PRODUCT
+Product: F5OS-A
+Version: 1
+Release: 5
+Patch: 4
+Build: 37447
+Build date: 2025-10-09
+Platform: R5R10
+Tag: LTS
+
+
+>> Configure mgmt
+appliance-1# show system mgmt-ip 
+system mgmt-ip state ipv4 system address 10.196.20.32
+system mgmt-ip state ipv4 prefix-length 24
+system mgmt-ip state ipv4 gateway 10.196.20.254
+system mgmt-ip state ipv6 system address ::
+system mgmt-ip state ipv6 prefix-length 0
+system mgmt-ip state ipv6 gateway ::
+appliance-1# 
+
+
+>> Configure DNS
+appliance-1# show system dns 
+ADDRESS       ADDRESS  PORT  
+-----------------------------
+192.168.10.1  -        53    
+192.168.11.1  -        53 
+
+==================================================================
+>> Configure SNMP
+==================================================================
+appliance-1# show running-config system allowed-ips 
+system allowed-ips allowed-ip snmp-server
+ config ipv4 address 10.145.45.205
+ config ipv4 prefix-length 32
+ config ipv4 port 161
+
+appliance-1# show system snmp
+system snmp engine-id state engine-id 80:00:2f:f4:03:14:a9:d0:15:38:02
+system snmp engine-id state type mac
+                          AUTHENTICATION  PRIVACY   
+NAME         NAME         PROTOCOL        PROTOCOL  
+----------------------------------------------------
+snmpv3user1  snmpv3user1  sha             aes       
+
+system snmp targets target t1
+ state name     t1
+ state community c1
+ state security-model v1
+ state ipv4 address 10.145.45.205
+ state ipv4 port 5001
+system snmp targets target t2
+ state name     t2
+ state community c2
+ state security-model v2c
+ state ipv4 address 10.145.45.205
+ state ipv4 port 5002
+system snmp targets target t3
+ state name t3
+ state user snmpv3user1
+ state ipv4 address 10.145.45.205
+ state ipv4 port 5003
+            SECURITY    
+NAME  NAME  MODEL       
+------------------------
+c1    c1    [ v1 ]      
+c2    c2    [ v2c ]     
+c3    c3    [ v1 v2c ]  
+
+appliance-1# 
+
+
+
+>> Check SNMP walk works
+>> root@ldap:~# snmpwalk -v1 -c c1 10.196.20.32   -M ALL:/root/mibs_f5os_appliance/:/root/mibs_netsnmp/   -m ALL .1
+root@ldap:~# snmpwalk -v1 -c c1 10.196.20.32   -M ALL:/root/mibs_f5os_appliance/:/root/mibs_netsnmp/   -m ALL .1
+RFC1213-MIB::sysDescr.0 = STRING: "Linux 3.10.0-1160.119.1.f5.1.el7_8.x86_64 : Appliance services version 1.5.4-37447"
+RFC1213-MIB::sysObjectID.0 = OID: F5-OS-SYSTEM-MIB::f5OsAppR10x00-DF
+RFC1213-MIB::sysUpTime.0 = Timeticks: (780453) 2:10:04.53
+RFC1213-MIB::sysContact.0 = STRING: "Customer Name <admin@customer.com>"
+RFC1213-MIB::sysName.0 = STRING: "localhost.localdomain"
+RFC1213-MIB::sysLocation.0 = STRING: "appliance-1"
+RFC1213-MIB::sysServices.0 = INTEGER: 72
+SNMPv2-MIB::sysORLastChange.0 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORID.1 = OID: F5-COMMON-SMI-MIB::platform
+SNMPv2-MIB::sysORID.2 = OID: IF-MIB::ifMIB
+SNMPv2-MIB::sysORDescr.1 = STRING: F5 Networks enterprise Platform MIB
+SNMPv2-MIB::sysORDescr.2 = STRING: The MIB module to describe generic objects for network interface sub-layers
+SNMPv2-MIB::sysORUpTime.1 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORUpTime.2 = Timeticks: (10) 0:00:00.10
+RFC1213-MIB::ifNumber.0 = INTEGER: 21
+RFC1213-MIB::ifIndex.1 = INTEGER: 1
+RFC1213-MIB::ifIndex.33554433 = INTEGER: 33554433
+RFC1213-MIB::ifIndex.33554434 = INTEGER: 33554434
+RFC1213-MIB::ifIndex.33554435 = INTEGER: 33554435
+RFC1213-MIB::ifIndex.33554436 = INTEGER: 33554436
+RFC1213-MIB::ifIndex.33554437 = INTEGER: 33554437
+RFC1213-MIB::ifIndex.33554438 = INTEGER: 33554438
+RFC1213-MIB::ifIndex.33554439 = INTEGER: 33554439
+RFC1213-MIB::ifIndex.33554440 = INTEGER: 33554440
+
+
+>> root@ldap:~# snmpwalk -v2c -c c2 10.196.20.32   -M ALL:/root/mibs_f5os_appliance/:/root/mibs_netsnmp/   -m ALL .1
+RFC1213-MIB::sysDescr.0 = STRING: "Linux 3.10.0-1160.119.1.f5.1.el7_8.x86_64 : Appliance services version 1.5.4-37447"
+RFC1213-MIB::sysObjectID.0 = OID: F5-OS-SYSTEM-MIB::f5OsAppR10x00-DF
+RFC1213-MIB::sysUpTime.0 = Timeticks: (760366) 2:06:43.66
+RFC1213-MIB::sysContact.0 = STRING: "Customer Name <admin@customer.com>"
+RFC1213-MIB::sysName.0 = STRING: "localhost.localdomain"
+RFC1213-MIB::sysLocation.0 = STRING: "appliance-1"
+RFC1213-MIB::sysServices.0 = INTEGER: 72
+SNMPv2-MIB::sysORLastChange.0 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORID.1 = OID: F5-COMMON-SMI-MIB::platform
+SNMPv2-MIB::sysORID.2 = OID: IF-MIB::ifMIB
+SNMPv2-MIB::sysORDescr.1 = STRING: F5 Networks enterprise Platform MIB
+
+SNMPv2-MIB::sysORDescr.2 = STRING: The MIB module to describe generic objects for network interface sub-layers
+SNMPv2-MIB::sysORUpTime.1 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORUpTime.2 = Timeticks: (10) 0:00:00.10
+RFC1213-MIB::ifNumber.0 = INTEGER: 21
+RFC1213-MIB::ifIndex.1 = INTEGER: 1
+RFC1213-MIB::ifIndex.33554433 = INTEGER: 33554433
+RFC1213-MIB::ifIndex.33554434 = INTEGER: 33554434
+RFC1213-MIB::ifIndex.33554435 = INTEGER: 33554435
+RFC1213-MIB::ifIndex.33554436 = INTEGER: 33554436
+RFC1213-MIB::ifIndex.33554437 = INTEGER: 33554437
+RFC1213-MIB::ifIndex.33554438 = INTEGER: 33554438
+RFC1213-MIB::ifIndex.33554439 = INTEGER: 33554439
+RFC1213-MIB::ifIndex.33554440 = INTEGER: 33554440
+RFC1213-MIB::ifIndex.33554441 = INTEGER: 33554441
+RFC1213-MIB::ifIndex.33554442 = INTEGER: 335544
+
+>> root@ldap:~# snmpwalk -v3 -l authPriv -u user1 -a SHA -A f5site02 -x AES128 -X f5site02 10.196.20.32 -M ALL:/root/mibs_f5os_appliance/:/root/mibs_netsnmp/ -m ALL .1
+RFC1213-MIB::sysDescr.0 = STRING: "Linux 3.10.0-1160.119.1.f5.1.el7_8.x86_64 : Appliance services version 1.5.4-37447"
+RFC1213-MIB::sysObjectID.0 = OID: F5-OS-SYSTEM-MIB::f5OsAppR10x00-DF
+RFC1213-MIB::sysUpTime.0 = Timeticks: (798948) 2:13:09.48
+RFC1213-MIB::sysContact.0 = STRING: "Customer Name <admin@customer.com>"
+RFC1213-MIB::sysName.0 = STRING: "localhost.localdomain"
+RFC1213-MIB::sysLocation.0 = STRING: "appliance-1"
+RFC1213-MIB::sysServices.0 = INTEGER: 72
+SNMPv2-MIB::sysORLastChange.0 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORID.1 = OID: F5-COMMON-SMI-MIB::platform
+SNMPv2-MIB::sysORID.2 = OID: IF-MIB::ifMIB
+SNMPv2-MIB::sysORDescr.1 = STRING: F5 Networks enterprise Platform MIB
+SNMPv2-MIB::sysORDescr.2 = STRING: The MIB module to describe generic objects for network interface sub-layers
+SNMPv2-MIB::sysORUpTime.1 = Timeticks: (10) 0:00:00.10
+SNMPv2-MIB::sysORUpTime.2 = Timeticks: (10) 0:00:00.10
+RFC1213-MIB::ifNumber.0 = INTEGER: 21
+RFC1213-MIB::ifIndex.1 = INTEGER: 1
+RFC1213-MIB::ifIndex.33554433 = INTEGER: 33554433
+RFC1213-MIB::ifIndex.33554434 = INTEGER: 33554434
+RFC1213-MIB::ifIndex.33554435 = INTEGER: 33554435
+RFC1213-MIB::ifIndex.33554436 = INTEGER: 33554436
+RFC1213-MIB::ifIndex.33554437 = INTEGER: 33554437
+RFC1213-MIB::ifIndex.33554438 = INTEGER: 33554438
+RFC1213-MIB::ifIndex.33554439 = INTEGER: 33554439
+RFC1213-MIB::ifIndex.33554440 = INTEGER: 33554440
+RFC1213-MIB::ifIndex.33554441 = INTEGER: 33554441
+RFC1213-MIB::ifIndex.33554442 = INTEGER:
+
+
+
+
+==================================================================
+Configure non-secure rsyslog
+==================================================================
+appliance-1# show running-config system logging 
+system logging config include-hostname true
+system logging remote-servers remote-server 10.145.41.46
+ config remote-port 514
+ config proto udp
+ selectors selector LOCAL0 INFORMATIONAL
+!
+
+
+>> Check on the remote server got the logs
+cd /var/log/loghost
+-bash-4.2# cd 10.196.20.32
+-bash-4.2# ls
+local0.log
+-bash-4.2# tail -f local0.log 
+Sep 22 12:07:30 appliance-1.chassis.local lacpd[1]: priority="Info" version=1.0 msgid=0x3401000000000085 msg="Interface enabled state changed." name="3.0" enabled="DISABLED".
+Sep 22 12:07:31 appliance-1.chassis.local fpgamgr[14]: priority="Info" version=1.0 msgid=0x309000000000002 msg="Updating interface link state" ifname="3.0" state="DOWN".
+Sep 22 12:07:31 appliance-1.chassis.local lacpd[1]: priority="Info" version=1.0 msgid=0x3401000000000084 msg="Interface link state changed." name="3.0" status="DOWN" speed=25000.
+Sep 22 12:07:37 appliance-1.chassis.local tcpdumpd-manager[8]: priority="Info" version=1.0 msgid=0x5404000000000026 msg="Processing update:" NUMPOINTS=1.
+Sep 22 12:07:37 appliance-1.chassis.local tcpdumpd-manager[8]: priority="Info" version=1.0 msgid=0x5404000000000025 msg="MOP_MODIFIED:" TYPE=2 TAG=221572658 IFNAME="3.0".
+Sep 22 12:07:37 appliance-1.chassis.local fpgamgr[14]: priority="Info" version=1.0 msgid=0x309000000000002 msg="Updating interface link state" ifname="3.0" state="UP".
+Sep 22 12:07:37 appliance-1.chassis.local alert-service[8]: priority="Notice" version=1.0 msgid=0x2201000000000029 msg="Received event." event="263169 interface-3.0 down EVENT NA "Interface down" "2026-09-22 12:07:37.538686890 UTC"".
+Sep 22 12:07:37 appliance-1.chassis.local alert-service[8]: priority="Notice" version=1.0 msgid=0x2201000000000029 msg="Received event." event="263168 interface-3.0 up EVENT NA "Interface up" "2026-09-22 12:07:37.544249500 UTC"".
+Sep 22 12:07:37 appliance-1.chassis.local lacpd[1]: priority="Info" version=1.0 msgid=0x3401000000000085 msg="Interface enabled state changed." name="3.0" enabled="ENABLED".
+Sep 22 12:07:37 appliance-1.chassis.local lacpd[1]: priority="Info" version=1.0 msgid=0x3401000000000084 msg="Interface link state changed." name="3.0" status="UP" speed=25000.
+
+
+^C
+-bash-4.2# ^C
+
+==================================================================
+Configure secure rsyslog
+==================================================================
+
+
+==================================================================
+Client-cert Auth
+==================================================================
+
+==================================================================
+Remote Auth
+==================================================================
+>> LDAP Secure
+>> LDAP Non-secure
+
+
+
+
+
 
