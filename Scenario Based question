@@ -38,3 +38,20 @@ This architecture separates test logic, equipment access, execution control, res
 🔹 3. Add precise logging and diagnostic information around the failing step.
 🔹 4. Report a product bug , it is is issue from product side, else
 🔹 5. If it is a test issue, fix the root cause by 
+
+✅✅ Q5 : How will you reduce test execution time ??
+🔹 1. I will reduce test execution time by prioritizing the testcases, execute high risk based basiness impacting testcases
+🔹 2. Parallel execution
+🔹 3. Intelligent test selections : Try to pick testcases which are impacted with code changes
+🔹 4. Infrastructure optimization : Try to decide the tests which are platfrom depentent/indepenedent
+🔹 5. Shift left testing 
+
+✅✅ Q6 : How do you integrate tests into CI/CD pipeline.
+🔹 1. When ever new feature/new tests automated and committed, we raise a MR automatically GIT pipeline will be triggered 
+🔹 2. It validates the basic pylint, code-coverage and sanity checks, The pipeline runs unit tests, API tests, If any critical test fails, the pipeline stops and notifies the team.
+🔹 3. When pipelines passes, will get required approvals from the test code owners
+🔹 4. Will merge code to master 
+🔹 5. As part of daily template runs we make sure new tests are integrated and run daily basis
+
+
+
