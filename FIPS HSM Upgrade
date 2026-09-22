@@ -207,7 +207,75 @@ Client-cert Auth
 Remote Auth
 ==================================================================
 >> LDAP Secure
+system aaa server-groups server-group ldap_grp config name ldap_grp
+system aaa server-groups server-group ldap_grp config type LDAP
+system aaa server-groups server-group ldap_grp servers server 10.145.45.205 config address 10.145.45.205
+system aaa server-groups server-group ldap_grp servers server 10.145.45.205 ldap config auth-port 636
+system aaa server-groups server-group ldap_grp servers server 10.145.45.205 ldap config type ldaps
+
+! Correct LDAP service account and user-search base
+system aaa authentication ldap binddn cn=admin,dc=velocity,dc=local
+system aaa authentication ldap bindpw adminpass
+system aaa authentication ldap base [ dc=velocity,dc=local ]
+
+! Enable and validate LDAPS
+system aaa authentication ldap ssl on
+system aaa authentication ldap tls_reqcert demand
+system aaa authentication ldap tls_cacert "<LDAP_CA_PEM>" ---> /etc/ssl/ldap/ca.crt
+
+! Use LDAP for login, with local accounts retained as fallback
+system aaa authentication config authentication-method [ LDAP_ALL LOCAL ]
+
+commit
+
+Kernel 3.10.0-1160.119.1.f5.1.el7_8.x86_64 on an x86_64
+appliance-1 login: ldap_user
+Password: 
+Last failed login: Tue Sep 22 13:15:45 UTC 2026 on ttyS0
+There was 1 failed login attempt since the last successful login.
+Welcome to the Management CLI
+ldap_user connected from 127.0.0.1 using console on appliance-1
+appliance-1#
+
+
 >> LDAP Non-secure
+
+>> RADIUS config
+appliance-1# show running-config system aaa server-groups server-group radius_grp 
+system aaa server-groups server-group radius_grp
+ config name radius_grp
+ config type RADIUS
+ servers server 10.145.45.205
+  config address 10.145.45.205
+  radius config auth-port 1812
+  radius config secret-key $8$OoOIjiWzZbV5zFKm4yr9ds+j3QUZu4LzndWw2qv2ssE=    >> testing123
+  radius config timeout 5
+ !
+
+CentOS Linux 7 (Core)
+Kernel 3.10.0-1160.119.1.f5.1.el7_8.x86_64 on an x86_64
+appliance-1 login: testuser
+Password: 
+Last login: Tue Sep 22 13:28:59 on ttyS0
+Welcome to the Management CLI
+testuser connected from 127.0.0.1 using console on appliance-1
+appliance-1#
+
+>> TACACS config
+system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 config address 10.145.45.205
+system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 tacacs config port 49
+system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 tacacs config secret-key <tacacskey>
+system aaa authentication config authentication-method [ TACACS_ALL LOCAL ]
+commit
+
+>> CentOS Linux 7 (Core)
+Kernel 3.10.0-1160.119.1.f5.1.el7_8.x86_64 on an x86_64
+appliance-1 login: tacacs_user
+Password: 
+Last login: Tue Sep 22 13:25:54 on ttyS0
+Welcome to the Management CLI
+tacacs_user connected from 127.0.0.1 using console on appliance-1
+appliance-1#
 
 
 
