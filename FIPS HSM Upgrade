@@ -278,6 +278,52 @@ tacacs_user connected from 127.0.0.1 using console on appliance-1
 appliance-1#
 
 
+==================================================================
+Configure NTP
+==================================================================
+>> NTP Key 
+90 SHA512 HEX:5D00AD129732DBE40158023220CEDE699098A55DDBF29723012B1629E0A925A757174113D4C900C66049F5A25F7417565279AC6493D64E811155E489DE223228
+
+>> NTP Server 10.145.41.46
+
+
+>> PFDI_SI_Test_device# show system ntp
+system ntp state enabled
+system ntp state enable-ntp-auth true
+system ntp ntp-keys ntp-key 90
+ state key-id 90
+ state key-type F5_NTP_AUTH_SHA512
+ state key-value "$8$Qf4cXDh39Xm2enaBMNvPL6M5QE42BA59pIVjCyQlGA+GxoUUzMp9jaKWKAXgB35QQZ9u4wHg\nH0N+1C56NxB1DoNmOAVFqzRGleSAoYjBuvNG0D+dRKVrSCrrWJ9u5LSCdmxgXPVFdDqWankX\nwCOJlVow623It66xJSd2gGrbWATS+jPP4ecSIPol7/52sWnMBkjDvFxs0cQpNiC83z+zdA=="
+system ntp servers server 10.145.41.46
+ state address    10.145.41.46
+ state port       123
+ state version    4
+ state association-type SERVER
+ state iburst     false
+ state prefer     false
+ state stratum    10
+ state root-delay 0
+ state root-dispersion 0
+ state offset     997
+ state poll-interval 6
+ state key-id     90
+ state authenticated true
+PFDI_SI_Test_device# 
+
+==================================================================
+Configure Proxy license server
+==================================================================
+PFDI_SI_Test_device# show system diagnostics proxy 
+system diagnostics proxy state proxy-username f5set
+system diagnostics proxy state proxy-server 10.145.45.205
+
+Username	Password
+proxyuser	automation
+f5set	f5site02
+
+==================================================================
+Install RPM packages
+==================================================================
 
 
 
