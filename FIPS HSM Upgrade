@@ -200,8 +200,232 @@ Configure secure rsyslog
 
 
 ==================================================================
-Client-cert Auth
+Client-cert Auth And OCSP
 ==================================================================
+>> OCSP /client cert server details : 10.145.37.225 (root/default)
+>> Certs placed under /root/sugitha_client_cert 
+>> use client1.p12 for login ---> passphrase 12345
+
+>> F5OS config
+syscon-1-active(config)# system aaa tls config verify-client-depth 6
+syscon-1-active(config)# system aaa tls config verify-client true
+syscon-1-active(config)# system aaa authentication config cert-auth enabled
+syscon-1-active(config)# system aaa authentication clientcert config client-cert-name-field subjectname-cn
+syscon-1-active(config)# commit
+Commit complete.
+syscon-1-active(config)# end
+syscon-1-active#
+
+
+syscon-1-active#
+syscon-1-active# config
+Entering configuration mode terminal
+syscon-1-active(config)# system aaa server-groups server-group ocspserver config name ocspserver type OCSP
+syscon-1-active(config-server-group-ocspserver)# servers server 10.145.37.225
+syscon-1-active(config-server-10.145.37.225)# config address 10.145.37.225
+syscon-1-active(config-server-10.145.37.225)# ocsp config port 8888
+syscon-1-active(config-server-10.145.37.225)# top
+syscon-1-active(config)# system aaa authentication ocsp config nonce-request Off override-responder On response-max-age 300 response-time-skew 300 enabled
+syscon-1-active(config)# commit
+Commit complete.
+syscon-1-active(config)# end
+syscon-1-active#
+
+
+ 
+syscon-1-active(config)# system aaa authentication users user jsmithclientcert0 config username jsmithclientcert0 role resource-admin 
+syscon-1-active(config-user-jsmithclientcert0)# commit 
+Commit complete.
+syscon-1-active(config-user-jsmithclientcert0)# exit
+syscon-1-active(config)# system aaa authentication users user jsmithclientcert1 config username jsmithclientcert1 role resource-admin 
+syscon-1-active(config-user-jsmithclientcert1)# commit
+Commit complete.
+syscon-1-active(config-us
+
+
+>> Config ca-cert
+system aaa tls ca-bundles ca-bundle test config content 
+-----BEGIN CERTIFICATE-----
+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
+OxY0poihoXc=
+-----END CERTIFICATE-----
+
+
+
+
+
+>> Start OCSP server
+openssl ocsp   -index index.txt   -port 8888   -rsigner ocsp.cert   -rkey ocsp.key   -CA ca.cert.pem   -text
+
+>> >> Now copy client1.p12 file to Downloads folder and try to login
+
+>> OCSP Request Data:
+    Version: 1 (0x0)
+    Requestor List:
+        Certificate ID:
+          Hash Algorithm: sha1
+          Issuer Name Hash: C1243EB99CB22A5AE4A5B78207D69AD630E898E5
+          Issuer Key Hash: D174CDB6E751FFBAAC12CB7229A166EF0FDBE481
+          Serial Number: 100002
+OCSP Response Data:
+    OCSP Response Status: successful (0x0)
+    Response Type: Basic OCSP Response
+    Version: 1 (0x0)
+    Responder Id: C = US, ST = Washington, O = F5, OU = F5DEV, CN = jsmithocspcert, emailAddress = jsmithocspcert@f5.com
+    Produced At: Sep 23 09:08:24 2026 GMT
+    Responses:
+    Certificate ID:
+      Hash Algorithm: sha1
+      Issuer Name Hash: C1243EB99CB22A5AE4A5B78207D69AD630E898E5
+      Issuer Key Hash: D174CDB6E751FFBAAC12CB7229A166EF0FDBE481
+      Serial Number: 100002
+    Cert Status: good
+    This Update: Sep 23 09:08:24 2026 GMT
+
+    Signature Algorithm: sha256WithRSAEncryption
+         0c:04:80:8d:4b:4b:35:c7:c6:32:d4:11:b1:da:31:c8:17:97:
+         56:26:13:b6:bc:45:15:6e:85:d4:75:86:70:fd:3f:23:15:b0:
+         a4:9d:37:da:b0:7a:3f:a6:95:95:36:1b:ff:bd:9f:74:4b:ee:
+         d5:6c:a9:81:4e:ec:84:19:23:9a:99:90:ab:d3:ef:5f:69:42:
+         f0:9b:c9:ee:d9:77:67:10:a7:9e:f3:d5:6d:7a:7f:65:3d:56:
+         1b:2b:e0:08:c1:59:11:34:b2:d1:00:1d:d5:02:c4:9d:98:37:
+         f7:4b:ac:ee:9d:bb:3f:60:53:25:57:19:58:9c:1f:69:03:b2:
+         47:61:b3:87:3f:46:92:9b:c9:e6:64:35:4e:cf:5a:e6:fd:c6:
+         d3:ca:0c:8e:f3:7a:56:db:80:df:11:e4:73:86:20:22:97:4b:
+         b4:be:98:d1:e0:43:ad:60:c4:78:55:65:25:9c:6f:89:55:9f:
+         a4:a7:cf:20:e3:a8:50:8b:61:41:65:7b:e0:ed:a0:d7:c6:2d:
+         f9:2d:46:05:20:1c:6b:7b:e7:1e:40:03:71:54:18:db:af:d2:
+         38:73:4c:25:4d:90:39:77:47:b2:4b:8f:bf:15:3e:4f:61:a0:
+         20:12:44:77:6f:e5:1b:b7:3e:89:77:c1:5c:f1:00:a4:44:99:
+         e5:c9:94:d8
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1048580 (0x100004)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=Washington, O=F5, OU=F5DEV, CN=jsmithcacert/emailAddress=jsmithcacert@f5.com
+        Validity
+            Not Before: Jun 19 12:08:43 2026 GMT
+            Not After : Jun 19 12:08:43 2027 GMT
+        Subject: C=US, ST=Washington, O=F5, OU=F5DEV, CN=jsmithocspcert/emailAddress=jsmithocspcert@f5.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:b4:45:96:80:13:a8:ba:ef:b3:0b:72:82:c2:79:
+                    f5:0e:01:d4:65:c9:31:47:6e:c3:9d:40:33:7e:7c:
+                    90:7f:b4:ef:d1:6a:dd:d3:22:04:60:d4:a5:3d:5f:
+                    bb:ec:4d:09:e8:00:93:d9:32:50:f5:43:88:93:20:
+                    8c:9c:85:e8:51:07:56:19:b4:9b:c3:19:8e:46:cf:
+                    0c:ef:7b:66:d1:49:fa:9f:d8:cc:1b:8e:60:39:1d:
+                    68:9d:af:8c:14:cd:27:ae:16:e2:dc:22:a2:cb:88:
+                    2b:d4:99:c9:58:0e:b0:f9:54:07:aa:7f:0e:ad:ae:
+                    87:14:df:94:e1:61:8e:f2:1e:40:32:5f:c9:e9:4d:
+                    18:b1:8f:59:42:50:31:3c:57:af:72:bf:14:34:92:
+                    97:62:da:21:0b:46:30:91:51:4d:e2:42:10:7a:f3:
+                    d1:1f:88:e5:a3:91:97:53:f4:e4:6a:64:fd:e1:d7:
+                    71:09:82:1c:96:3a:1a:13:de:af:bf:74:f0:3d:24:
+                    a7:a0:4c:7e:62:e3:ec:7f:c6:ae:77:91:3a:b7:38:
+                    77:93:db:8e:71:3b:82:95:4d:30:ce:d7:a1:3c:91:
+                    8f:c3:c0:fb:17:43:cc:f0:12:4c:6f:bd:75:6c:46:
+                    4e:45:fc:88:c9:79:95:12:5e:a8:b6:b0:21:b8:33:
+                    b1:35
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints:
+                CA:FALSE
+            X509v3 Key Usage:
+                Digital Signature, Non Repudiation, Key Encipherment
+            X509v3 Extended Key Usage:
+                OCSP Signing
+    Signature Algorithm: sha256WithRSAEncryption
+         2d:05:b2:4e:1f:f5:ab:9f:ad:ab:1c:3d:83:cb:72:6b:09:72:
+         43:4a:13:ec:91:47:06:5d:79:ee:4c:aa:f1:a0:97:ab:a1:e3:
+         53:81:34:6b:b4:22:19:71:c0:33:64:39:22:c9:b1:53:94:30:
+         1a:76:35:ac:07:53:72:d6:cb:17:b7:38:d3:45:a5:2d:53:17:
+         89:9d:88:5a:26:f8:23:ef:91:11:29:53:1b:22:7a:95:fb:c0:
+         17:12:3b:b7:9a:79:65:b5:27:7d:72:85:be:2a:86:39:2f:93:
+         12:0f:93:6b:de:f1:38:23:69:44:11:a8:28:55:21:5c:6b:65:
+         8b:f3:ee:4f:47:71:91:c7:1d:ba:c1:0c:59:6e:e3:63:27:38:
+         9e:70:d1:d0:5a:2e:c9:4b:01:12:18:43:bd:32:d1:f5:c8:1a:
+         72:4e:27:2f:7d:6f:e8:4d:55:1f:42:65:8f:8e:e1:e8:95:08:
+         50:c8:db:65:26:0f:40:c7:9b:29:f7:fe:54:46:fb:0e:16:b3:
+         0a:c6:dc:88:1f:5a:8e:52:f7:ba:8a:d7:db:ea:93:0f:54:4f:
+         e0:b7:8c:9f:c7:64:bd:04:72:a6:75:99:1a:7a:45:aa:9e:2a:
+         39:3e:e7:98:7f:de:a0:7a:1b:c7:4e:5d:d2:05:a2:0f:05:2b:
+         9f:8f:bd:d4:49:7e:8a:fa:22:78:1d:db:53:77:fc:70:43:5a:
+         d0:16:8b:36:39:c6:3b:d6:9c:5f:48:0f:4e:97:4e:70:42:77:
+         e0:6f:48:77:43:8e:04:1f:c3:31:cf:a7:bc:1e:e1:63:d2:df:
+         f3:ee:fd:d6:bb:70:6e:82:b5:54:0d:de:0d:8d:98:14:7f:87:
+         fa:ea:3a:57:5f:bb:75:4a:03:09:47:58:58:a5:30:fd:be:84:
+         c8:72:49:c4:5d:17:90:0f:18:66:f9:40:34:10:0f:4f:bb:1a:
+         5f:2f:1c:cf:e8:7c:e4:46:1e:4d:56:56:fb:3f:59:7e:a6:f5:
+         5a:88:b7:48:9b:98:79:f6:37:95:05:d1:e8:7e:36:e6:c1:e2:
+         26:1a:d5:93:9c:2f:a1:43:76:93:8e:2e:f1:3f:89:18:68:6e:
+         b5:18:8b:4f:cb:d6:c0:01:ac:1b:fb:da:c6:e6:19:bd:63:76:
+         ec:32:82:ab:cd:1d:34:83:9a:05:23:13:d4:2b:9f:a3:f9:0e:
+         47:e1:5b:62:40:14:e6:88:8b:9f:36:0c:3b:a1:b6:14:08:4f:
+         a9:8d:aa:7f:c5:39:cb:1f:65:c6:09:3f:61:bb:35:a1:60:44:
+         fd:ab:e1:2f:18:88:ca:18:db:c7:b9:42:df:87:36:d7:67:97:
+         29:68:37:45:92:a2:11:df
+-----BEGIN CERTIFICATE-----
+MIIEpDCCAoygAwIBAgIDEAAEMA0GCSqGSIb3DQEBCwUAMHoxCzAJBgNVBAYTAlVT
+MRMwEQYDVQQIDApXYXNoaW5ndG9uMQswCQYDVQQKDAJGNTEOMAwGA1UECwwFRjVE
+RVYxFTATBgNVBAMMDGpzbWl0aGNhY2VydDEiMCAGCSqGSIb3DQEJARYTanNtaXRo
+Y2FjZXJ0QGY1LmNvbTAeFw0yNjA2MTkxMjA4NDNaFw0yNzA2MTkxMjA4NDNaMH4x
+CzAJBgNVBAYTAlVTMRMwEQYDVQQIDApXYXNoaW5ndG9uMQswCQYDVQQKDAJGNTEO
+MAwGA1UECwwFRjVERVYxFzAVBgNVBAMMDmpzbWl0aG9jc3BjZXJ0MSQwIgYJKoZI
+hvcNAQkBFhVqc21pdGhvY3NwY2VydEBmNS5jb20wggEiMA0GCSqGSIb3DQEBAQUA
+A4IBDwAwggEKAoIBAQC0RZaAE6i677MLcoLCefUOAdRlyTFHbsOdQDN+fJB/tO/R
+at3TIgRg1KU9X7vsTQnoAJPZMlD1Q4iTIIychehRB1YZtJvDGY5Gzwzve2bRSfqf
+2MwbjmA5HWidr4wUzSeuFuLcIqLLiCvUmclYDrD5VAeqfw6trocU35ThYY7yHkAy
+X8npTRixj1lCUDE8V69yvxQ0kpdi2iELRjCRUU3iQhB689EfiOWjkZdT9ORqZP3h
+13EJghyWOhoT3q+/dPA9JKegTH5i4+x/xq53kTq3OHeT245xO4KVTTDO16E8kY/D
+wPsXQ8zwEkxvvXVsRk5F/IjJeZUSXqi2sCG4M7E1AgMBAAGjLzAtMAkGA1UdEwQC
+MAAwCwYDVR0PBAQDAgXgMBMGA1UdJQQMMAoGCCsGAQUFBwMJMA0GCSqGSIb3DQEB
+CwUAA4ICAQAtBbJOH/Wrn62rHD2Dy3JrCXJDShPskUcGXXnuTKrxoJeroeNTgTRr
+tCIZccAzZDkiybFTlDAadjWsB1Ny1ssXtzjTRaUtUxeJnYhaJvgj75ERKVMbInqV
++8AXEju3mnlltSd9coW+KoY5L5MSD5Nr3vE4I2lEEagoVSFca2WL8+5PR3GRxx26
+wQxZbuNjJziecNHQWi7JSwESGEO9MtH1yBpyTicvfW/oTVUfQmWPjuHolQhQyNtl
+Jg9Ax5sp9/5URvsOFrMKxtyIH1qOUve6itfb6pMPVE/gt4yfx2S9BHKmdZkaekWq
+nio5PueYf96gehvHTl3SBaIPBSufj73USX6K+iJ4HdtTd/xwQ1rQFos2OcY71pxf
+SA9Ol05wQnfgb0h3Q44EH8Mxz6e8HuFj0t/z7v3Wu3BugrVUDd4NjZgUf4f66jpX
+X7t1SgMJR1hYpTD9voTIcknEXReQDxhm+UA0EA9PuxpfLxzP6HzkRh5NVlb7P1l+
+pvVaiLdIm5h59jeVBdHofjbmweImGtWTnC+hQ3aTji7xP4kYaG61GItPy9bAAawb
++9rG5hm9Y3bsMoKrzR00g5oFIxPUK5+j+Q5H4VtiQBTmiIufNgw7obYUCE+pjap/
+xTnLH2XGCT9huzWhYET9q+EvGIjKGNvHuULfhzbXZ5cpaDdFkqIR3w==
+-----END CERTIFICATE-----
+^C
 
 ==================================================================
 Remote Auth
