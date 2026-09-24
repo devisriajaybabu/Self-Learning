@@ -37,6 +37,26 @@ Server:      10.10.10.100
      >> nslookup app.company.com
 🔹 If the issue is beyond organizational boundaries, I collect packet captures and traceroute evidence and engage the service provider.
 🔹 This systematic approach helps isolate whether the failure is related to connectivity, routing, security policies, DNS, transport protocols, or application behavior.
-✅✅ 
-✅✅ 
+
+✅✅ Q 3: During testing of a TCP connection, you observe that the latency increases after a sudden traffic surge. Why does this happen?
+
+Best Answer:
+The increased latency is likely due to TCP’s congestion control mechanisms. When a sudden traffic surge occurs:
+
+Congestion might build up in the network, causing packet queues at routers and increasing the transmission delay.
+With TCP congestion control algorithms like slow start, the sender reduces the transmission rate to prevent further congestion.
+This throttling increases the time for subsequent packets to reach the destination.
+To address this, we may need to analyze the root cause of the congestion (e.g., insufficient bandwidth, misconfigured routers) and optimize network resources or
+adjust TCP configuration parameters like window size or queue lengths.
+
+✅✅ Q 4: Can you explain how the time-to-live (TTL) field works in an IP packet?
+
+Best Answer:
+Time-to-live (TTL) is an 8-bit field in the IP header.
+Its purpose is to prevent routing loops in a network.
+Each time a packet traverses a router, its TTL is decremented by 1. 
+If the TTL value becomes zero before reaching its destination, the router discards the packet and sends an ICMP "Time Exceeded" message to the sender.
+
+This mechanism ensures that packets do not keep circulating indefinitely in the event of a routing loop.
+
 ✅✅ 
