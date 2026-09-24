@@ -551,4 +551,17 @@ Install RPM packages
 
 
 
+==================================================================
+Live Upgrade to 1.5.4 GA --> HR1
+==================================================================
+
+PFDI_SI_Test_device(config)# system image set-version iso-version 1.5.4-
+Possible completions:
+  1.5.4-37447  1.5.4-41954  1.5.4-42566
+PFDI_SI_Test_device(config)# system image set-version iso-version 1.5.4-41954 proceed yes
+response System ISO version has been set
+PFDI_SI_Test_device(config)# 
+
+
+
 
