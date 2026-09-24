@@ -552,7 +552,7 @@ Install RPM packages
 
 
 ==================================================================
-Live Upgrade to 1.5.4 GA --> HR1
+Live Upgrade to 1.5.4 GA --> HR1 --> HR2 --> HR3 --> 2.1.0
 ==================================================================
 
 PFDI_SI_Test_device(config)# system image set-version iso-version 1.5.4-
@@ -561,6 +561,554 @@ Possible completions:
 PFDI_SI_Test_device(config)# system image set-version iso-version 1.5.4-41954 proceed yes
 response System ISO version has been set
 PFDI_SI_Test_device(config)# 
+
+
+PFDI_SI_Test_device# config
+Entering configuration mode terminal
+PFDI_SI_Test_device(config)# system image set-version iso-version 2.1.0-9795 proceed yes
+response System ISO version has been set
+
+
+>> 
+Rocky Linux 8.10 (Green Obsidian)
+Kernel 4.18.0-553.157.1.f5.1.2.0.el8_10.x86_64 on an x86_64
+Please DND PFDI. Please contact Devi K
+appliance-1 login: root
+Password:          Starting Apply IMA-exemption SELinux labels to k3s binaries...
+[  OK  ] Started Apply IMA-exemption SELinux labels to k3s binaries.
+
+Last login: Thu Sep 24 08:43:36 from 127.0.0.1
+Please DND PFDI. Please contact Devi K
+System Time: 2026-09-24 08:48:17 UTC
+[root@appliance-1(PFDI_SI_Test_device):Waiting for ConfD] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ #          Stopping Command Scheduler...
+[  OK  ] Stopped Command Scheduler.
+[  OK  ] Started Command Scheduler.
+         Starting Apply IMA-exemption SELinux labels to k3s binaries...
+[  OK  ] Started Apply IMA-exemption SELinux labels to k3s binaries.
+         Starting Network Manager Script Dispatcher Service...
+[  OK  ] Started Network Manager Script Dispatcher Service.
+         Stopping Docker Application Container Engine...
+[  OK  ] Stopped Docker Application Container Engine.
+         Starting Docker Application Container Engine...
+[  OK  ] Started Docker Application Container Engine.
+         Starting Restart rsyslogd to reload configuration...
+         Stopping System Logging Service...
+[  OK  ] Stopped System Logging Service.
+         Starting System Logging Service...
+[  OK  ] Started System Logging Service.
+[  OK  ] Started Restart rsyslogd to reload configuration.
+         Starting Apply IMA-exemption SELinux labels to k3s binaries...
+[  OK  ] Started Software Management Service.
+[  OK  ] Started Apply IMA-exemption SELinux labels to k3s binaries.
+
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Offline] ~ #          Starting Network Manager Script Dispatcher Service...
+[  OK  ] Started Network Manager Script Dispatcher Service.
+         Starting Network Manager Script Dispatcher Service...
+[  OK  ] Started Network Manager Script Dispatcher Service.
+         Starting Network Manager Script Dispatcher Service...
+[  OK  ] Started Network Manager Script Dispatcher Service.
+         Starting Restart rsyslogd to reload configuration...
+         Stopping System Logging Service...
+[  OK  ] Stopped System Logging Service.
+         Starting System Logging Service...
+[  OK  ] Started System Logging Service.
+[  OK  ] Started Restart rsyslogd to reload configuration.
+[  342.839853] liquidsec_pf_vf_driver 0000:ca:00.0: Unable to obtain proper health status
+         Starting rpm-ostree System Management Daemon...
+[  OK  ] Started rpm-ostree System Management Daemon.
+[  OK  ] Started Launch platform service containers through Docker Compose.
+         Starting Eanbling the dnsmasq service...
+[  OK  ] Started Appliance Orchestration Manager.
+         Starting Configure custom iptable rules...
+         Starting Qkviewd service for the host...
+[  OK  ] Started Qkviewd service for the host.
+         Starting Apply IMA-exemption SELinux labels to k3s binaries...
+[  OK  ] Started DNS caching server..
+[  OK  ] Started Eanbling the dnsmasq service.
+[  OK  ] Started Apply IMA-exemption SELinux labels to k3s binaries.
+         Starting TPM2 Access Broker and Resource Management Daemon...
+[  OK  ] Started TPM2 Access Broker and Resource Management Daemon.
+[  OK  ] Started Configure custom iptable rules.
+[  OK  ] Started Bootevent Service.
+[  OK  ] Reached target Multi-User System.
+         Starting Update UTMP about System Runlevel Changes...
+[  OK  ] Started Update UTMP about System Runlevel Changes.
+[  350.976035] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 0 to 2000Mbps
+[  351.184512] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 1 to 2000Mbps
+[  351.392987] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 2 to 2000Mbps
+[  351.601462] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 3 to 2000Mbps
+[  351.809933] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 4 to 0Mbps
+[  351.817655] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 5 to 0Mbps
+[  351.825374] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 6 to 0Mbps
+[  351.833092] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 7 to 0Mbps
+[  351.840808] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 8 to 0Mbps
+[  351.848528] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 9 to 0Mbps
+[  351.856244] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 10 to 0Mbps
+[  351.864051] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 11 to 0Mbps
+[  351.871855] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 12 to 0Mbps
+[  351.879660] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 13 to 0Mbps
+[  351.887463] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 14 to 0Mbps
+[  351.895268] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 15 to 0Mbps
+[  351.903071] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 16 to 0Mbps
+[  351.910877] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 17 to 0Mbps
+[  351.918681] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 18 to 0Mbps
+[  351.926484] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 19 to 0Mbps
+[  351.934287] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 20 to 0Mbps
+[  351.942091] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 21 to 0Mbps
+[  351.949896] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 22 to 0Mbps
+[  351.957702] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 23 to 0Mbps
+[  351.965506] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 24 to 0Mbps
+[  351.973311] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 25 to 0Mbps
+[  351.981117] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 26 to 0Mbps
+[  351.988923] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 27 to 0Mbps
+[  351.996725] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 28 to 0Mbps
+[  352.004529] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 29 to 0Mbps
+[  352.012332] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 30 to 0Mbps
+[  352.020137] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 31 to 0Mbps
+[  358.628091] c6xx 0000:53:00.0: Cannot use PF with IOMMU enabled
+[  358.982095] c6xx 0000:54:00.0: Cannot use PF with IOMMU enabled
+[  359.326103] c6xx 0000:55:00.0: Cannot use PF with IOMMU enabled
+[  359.676105] c6xx 0000:c5:00.0: Cannot use PF with IOMMU enabled
+[  360.038109] c6xx 0000:c6:00.0: Cannot use PF with IOMMU enabled
+[  360.404113] c6xx 0000:c7:00.0: Cannot use PF with IOMMU enabled
+[  361.491177] c6xx 0000:53:00.0: Cannot use PF with IOMMU enabled
+[  361.840188] c6xx 0000:54:00.0: Cannot use PF with IOMMU enabled
+[  362.189188] c6xx 0000:55:00.0: Cannot use PF with IOMMU enabled
+[  362.524809] c6xx 0000:c5:00.0: Cannot use PF with IOMMU enabled
+[  362.872674] c6xx 0000:c6:00.0: Cannot use PF with IOMMU enabled
+[  363.219199] c6xx 0000:c7:00.0: Cannot use PF with IOMMU enabled
+                                                                               
+Sep 24 08:53:42 PFDI_SI_Test_device image-agent[7]: priority="Info" version=1.0 msgid=0x8002000000000002 msg="System image upgrade completed" os_version="2.1.0-9795" service_version="2.1.0-9795".
+                                                                               
+
+[root@appliance-1(PFDI_SI_Test_device):Waiting for cluster status] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Waiting for cluster status] ~ 
+
+
+
+>> root@appliance-1(PFDI_SI_Test_device):Active] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # cat /etc/PRODUCT
+Product: F5OS
+Version: 2
+Release: 1
+Patch: 0
+Build: 9795
+Build date: 2026-09-23
+Platform: R5R1X
+Branch: main
+Tag: NSIT
+Commit: 683a5c76
+Destination: nsit
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # su admin
+Please DND PFDI. Please contact Devi K
+System Time: 2026-09-24 08:56:23 UTC
+Welcome to the Management CLI
+root connected from 127.0.0.1 using console on PFDI_SI_Test_device
+PFDI_SI_Test_device# show fips
+fips resources occupied-acclr-dev 8
+fips resources occupied-contexts 250003
+fips resources occupied-keys 9400
+fips resources occupied-partitions 4
+fips resources total-acclr-dev 63
+fips resources total-contexts 1000000
+fips resources total-keys 102235
+fips resources total-partitions 32
+fips status last-updated "Thu Sep 24 08:56:09 2026\n"
+fips status state      2
+fips status desc       "FIPS mode with single factor authentication"
+fips status label      cavium
+fips status model      "NITROX-III CNN35XX-NFBE"
+fips status part-number CNN3560-NFBE-3.0-G
+fips status serial-number 6.0G2220-VPM009280
+fips status firmware-major-version 2
+fips status firmware-minor-version 9
+fips status hw-major-version 6
+fips status hw-minor-version 0
+fips status build-number 0702
+fips status firmware-id CNN35XX-NFBE-FW-2.09-0702
+fips status temperature "51 C"
+fips status wear-leveling DEVICE_STATUS_OK
+fips partitions partition PARTITION_1
+ state keys            100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.0
+fips partitions partition part2
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.2
+fips partitions partition part3
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.4
+fips partitions partition part4
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.6
+                LOGIN    
+                FAILURE  
+USERNAME  TYPE  COUNT    
+-------------------------
+f5so      CO    0        
+
+IMAGE                      SOURCE  ID                         FW TYPE     
+--------------------------------------------------------------------------
+CNN35XX-NFBE-FW-2.09-0702  HSM     CNN35XX-NFBE-FW-2.09-0702  PRODUCTION  
+
+                          PCI      
+                          DEVICE   
+NAME         PARTITION    ID       
+-----------------------------------
+tenant17134  PARTITION_1  ca:10.0  
+tenant17518  part2        ca:10.2  
+tenant21003  part3        ca:10.4  
+tennat21101  part4        ca:10.6  
+
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# config
+Entering configuration mode terminal
+PFDI_SI_Test_device(config)# fips set-partition name part5 
+Value for 'so-password' (<string, min: 7 chars, max: 30 chars>): ********
+[  586.209988] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 4 to 2000Mbps
+result fips partition part5 has been created
+PFDI_SI_Test_device(config)# 
+PFDI_SI_Test_device(config)# 
+PFDI_SI_Test_device(config)# 
+PFDI_SI_Test_device(config)# fips set-partition name part6 keys 100 accel-devs 2 
+Value for 'so-password' (<string, min: 7 chars, max: 30 chars>): ********
+[  599.825753] liquidsec_pf_vf_driver 0000:ca:00.0: Limiting bandwidth of VF 5 to 2000Mbps
+result fips partition part6 has been created
+PFDI_SI_Test_device(config)# 
+PFDI_SI_Test_device(config)# 
+PFDI_SI_Test_device(config)# exit
+PFDI_SI_Test_device# show fips partitions 
+fips partitions partition PARTITION_1
+ state keys            100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.0
+fips partitions partition part2
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.2
+fips partitions partition part3
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.4
+fips partitions partition part4
+ state keys            3100
+ state accel-devs      2
+ state backup          enabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:10.6
+fips partitions partition part5
+ state keys            3100
+ state accel-devs      2
+ state backup          disabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:11.0
+fips partitions partition part6
+ state keys            100
+ state accel-devs      2
+ state backup          disabled
+ state fips-state      -1
+ state occupied-session-keys 0
+ state session-count   0
+ state pci-address     ca:11.2
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# show fips tenants 
+                          PCI      
+                          DEVICE   
+NAME         PARTITION    ID       
+-----------------------------------
+tenant17134  PARTITION_1  ca:10.0  
+tenant17518  part2        ca:10.2  
+tenant21003  part3        ca:10.4  
+tennat21101  part4        ca:10.6  
+
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# 
+PFDI_SI_Test_device# exit
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # kubectl get pods -A
+NAMESPACE     NAME                                READY   STATUS              RESTARTS   AGE
+default       helper-job-tenant21003-1-mvzp9      0/1     ContainerCreating   0          1s
+default       virt-launcher-tenant17134-1-98sd9   1/1     Running             0          45s
+default       virt-launcher-tenant17518-1-x992z   0/1     Running             0          21s
+kube-system   coredns-ddcbc7ffd-plkh4             1/1     Running             0          2m43s
+kube-system   kube-multus-ds-8rs6b                1/1     Running             0          2m33s
+kubevirt      virt-api-5b56698b78-djfzm           1/1     Running             0          107s
+kubevirt      virt-controller-67f78b9cfc-bxngr    1/1     Running             0          82s
+kubevirt      virt-controller-67f78b9cfc-zp5zr    1/1     Running             0          82s
+kubevirt      virt-handler-t4cf6                  1/1     Running             0          82s
+kubevirt      virt-operator-7ff6f9b6fc-9q7sn      1/1     Running             0          2m15s
+kubevirt      virt-operator-7ff6f9b6fc-xfgh4      1/1     Running             0          2m15s
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # 
+[root@appliance-1(PFDI_SI_Test_device):Active] ~ # cd /var/shared/core
+[root@appliance-1(PFDI_SI_Test_device):Active] core # ls
+container
+[root@appliance-1(PFDI_SI_Test_device):Active] core # cd container/
+[root@appliance-1(PFDI_SI_Test_device):Active] container # ls
+core..libvirtd.22653.1790239444.core.gz
+core..libvirtd.22653.1790239444.core.gz.crc
+core..libvirtd.22666.1790239444.core.gz
+core..libvirtd.22666.1790239444.core.gz.crc
+core..libvirtd.26124.1790239444.core.gz.crc
+core..libvirtd.26126.1790239444.core.gz
+core..libvirtd.26126.1790239444.core.gz.crc
+[root@appliance-1(PFDI_SI_Test_device):Active] cont
+
+
+>> [root@appliance-1(PFDI_SI_Test_device):Active] container # kubectl get pods -A
+NAMESPACE     NAME                                READY   STATUS    RESTARTS   AGE
+default       virt-launcher-tenant17134-1-98sd9   1/1     Running   0          16m
+default       virt-launcher-tenant17518-1-x992z   1/1     Running   0          16m
+default       virt-launcher-tenant21003-1-6jfrg   1/1     Running   0          16m
+default       virt-launcher-tennat21101-1-4vhmb   1/1     Running   0          15m
+kube-system   coredns-ddcbc7ffd-plkh4             1/1     Running   0          18m
+kube-system   kube-multus-ds-8rs6b                1/1     Running   0          18m
+kubevirt      virt-api-5b56698b78-djfzm           1/1     Running   0          17m
+kubevirt      virt-controller-67f78b9cfc-bxngr    1/1     Running   0          17m
+kubevirt      virt-controller-67f78b9cfc-zp5zr    1/1     Running   0          17m
+kubevirt      virt-handler-t4cf6                  1/1     Running   0          17m
+kubevirt      virt-operator-7ff6f9b6fc-9q7sn      1/1     Running   0          18m
+kubevirt      virt-operator-7ff6f9b6fc-xfgh4      1/1     Running   0          18m
+[root@appliance-1(PFDI_SI_Test_device):Active] container # 
+[root@appliance-1(PFDI_SI_Test_device):Active] container # 
+[root@appliance-1(PFDI_SI_Test_device):Active] container # 
+[root@appliance-1(PFDI_SI_Test_device):Active] container # 
+[root@appliance-1(PFDI_SI_Test_device):Active] container # 
+t21101-1pliance-1(PFDI_SI_Test_device):Active] container # virtctl console tennat
+Successfully connected to tennat21101-1 console. Press Ctrl+] or Ctrl+5 to exit console.
+
+BIG-IP 21.1.0.1 Build 0.0.18
+Kernel 3.10.0-862.14.4.el7.x86_64 on an x86_64
+localhost login: 
+BIG-IP 21.1.0.1 Build 0.0.18
+Kernel 3.10.0-862.14.4.el7.x86_64 on an x86_64
+localhost login: 
+BIG-IP 21.1.0.1 Build 0.0.18
+Kernel 3.10.0-862.14.4.el7.x86_64 on an x86_64
+localhost login: 
+BIG-IP 21.1.0.1 Build 0.0.18
+Kernel 3.10.0-862.14.4.el7.x86_64 on an x86_64
+localhost login: root
+Password: 
+Last login: Wed Sep 23 21:56:19 on ttyS0
+[root@localhost:Active:Standalone] config # 
+[root@localhost:Active:Standalone] config # 
+[root@localhost:Active:Standalone] config # 
+[root@localhost:Active:Standalone] config # fipsutil info
+Label:              cavium
+Model:              NITROX-III CNN35XX-NFBE
+
+Serial Number:      6.0G2220-VPM009280
+FIPS state:         -1
+
+MaxSessionCount:    2047
+SessionCount:       0
+
+MaxPinLen:          32
+MinPinLen:          8
+TotalPublicMemory:  494336
+FreePublicMemory:   263232
+TotalUserKeys:      3100
+AvailableUserKeys:  3100
+
+Loging failures:
+    user:    0
+    officer: 0
+
+Temperature:        60 C
+HW version:         54.48
+Firmware version:   CNN35XX-NFBE-FW-2.09-0702
+
+[root@localhost:Active:Standalone] config # fipsutil init
+WARNING: This erases all keys from the FIPS 140 device.
+Any configuration objects dependent on FIPS keys will cause
+the configuration fail to load.
+
+==================== WARNING ================================
+The FIPS device will be reset to factory default state.
+All keys and user identities currently stored in the device
+will be erased.
+Any configuration objects dependent on FIPS keys will cause
+the configuration fail to load.
+
+Press <ENTER> to continue or Ctrl-C to cancel
+
+Resetting the device ...
+
+The FIPS device is now in factory default state.
+Enter new Security Officer password (min. 8, max. 32 characters): 
+Re-enter Security Officer password: 
+
+NOTE: security domain label must be identical on peer
+FIPS devices in order to be able to synchronize with them.
+Enter security domain label (max. 49 chars, default: F5FIPS): f5fips
+Initializing new security domain (f5fips)...
+Creating security officer identities
+Creating crypto user identities
+Waiting for the device to re-initialize ...
+Creating key encryption key (KEK)
+The FIPS device has been initialized.
+
+Restart all services (in tmsh "restart sys service all")
+or reboot the unit in order to allow the system to use the FIPS device.
+
+NOTE: Restarting services will disrupt load-balanced traffic and may
+terminate remote login sessions to the device.
+[root@localhost:Active:Standalone] config # tmsh restart sys service all
+[root@localhost:INOPERATIVE:Standalone] config # 
+Broadcast message from systemd-journald@localhost.localdomain (Thu 2026-09-24 02:15:19 PDT):
+
+logger[17177]: Re-starting devmgmtd
+
+2026 Sep 24 02:15:19 localhost.localdomain logger[17177]: Re-starting devmgmtd
+
+[root@localhost:INOPERATIVE:Standalone] config # 
+[root@localhost:INOPERATIVE:Standalone] config # 
+[root@localhost:INOPERATIVE:Standalone] config # 
+[root@localhost:INOPERATIVE:Standalone] config # tmsh
+root@(localhost)(pid-20822)(cfg-sync Standalone)(INOPERATIVE)(/Common)(tmos)# show sys crypto fips
+-------------------------------------------
+FIPS 140 Hardware Device
+-------------------------------------------
+no private keys found
+root@(localhost)(pid-20822)(cfg-sync Standalone)(INOPERATIVE)(/Common)(tmos)# 
+root@(localhost)(pid-20822)(cfg-sync Standalone)(INOPERATIVE)(/Common)(tmos)# q
+[root@localhost:INOPERATIVE:Standalone] config # 
+[root@localhost:INOPERATIVE:Standalone] config # 
+[root@localhost:INOPERATIVE:Standalone] config # 
+ i in `seq 1 20`; do echo Creating key $i; tmsh create sys crypt[root@localhost:sflow_agent DOWN:Standalone] config # time for i in `sehird$i security-type fips common-name keysthird$i.com key-size 2048; doned/keyst 
+Creating key 1
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird1) folder does not exist
+Creating key 2
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird2) folder does not exist
+Creating key 3
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird3) folder does not exist
+Creating key 4
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird4) folder does not exist
+Creating key 5
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird5) folder does not exist
+Creating key 6
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird6) folder does not exist
+Creating key 7
+01070734:3: Configuration error: Can't associate Certificate Key File (/third/keysthird7) folder does not exist
+Creating key 8
+
+[root@localhost:sflow_agent DOWN:Standalone] config # 
+[root@localhost:sflow_agent DOWN:Standalone] config # 
+[root@localhost:sflow_agent DOWN:Standalone] config # 
+[root@localhost:sflow_agent DOWN:Standalone] config # 
+[root@localhost:sflow_agent DOWN:Standalone] config # 
+b$i security-type fips common-name 4096keypairab$i.com key-size 4096; doneypaira 
+Creating key 1
+
+Creating key 2
+Creating key 3
+Creating key 4
+
+Broadcast message from systemd-journald@localhost.localdomain (Thu 2026-09-24 02:16:03 PDT):
+
+logger[22399]: Re-starting named
+
+2026 Sep 24 02:16:03 localhost.localdomain logger[22399]: Re-starting named
+Creating key 5
+Creating key 6
+Creating key 7
+Creating key 8
+Creating key 9
+Creating key 10
+Creating key 11
+Creating key 12
+Creating key 13
+Creating key 14
+Creating key 15
+Creating key 16
+Creating key 17
+Creating key 18
+Creating key 19
+Creating key 20
+
+real    1m40.838s
+user    0m5.962s
+sys 0m0.653s
+[root@localhost:Active:Standalone] config # 
+[root@localhost:Active:Standalone] config # tmsh
+s cofif
+Syntax Error: "cofif" unexpected argument
+root@(localhost)(pid-22790)(cfg-sync Standalone)(Active)(/Common)(tmos)# save sys config
+Saving running configuration...
+  /config/bigip.conf
+  /config/bigip_base.conf
+  /config/bigip_user.conf
+root@(localhost)(pid-22790)(cfg-sync Standalone)(Active)(/Common)(tmos)# show sys crypto fips
+-------------------------------------------
+FIPS 140 Hardware Device
+-------------------------------------------
+=== private keys (27)
+ID                                      MOD.LEN(bits)
+b11bb0ebd37aac69f1a60d2c91201a8b        2048
+        
+a83d70d56e1def79f353ae1107d73ff2        2048
+        
+8fd40e65490b136efb28c5a88d900a02        2048
+        
+af6da6feeac66915c483266ae87be329        2048
+        
+a638c09437e1780fe084d61cd1192108        2048
+        
+affcf5353c4559be34817440c05f006e        2048
+        
+8e93a0fa7f03abd308a4ff09aba76e50        2048
+        
+975fe1cbc1142e1de893c31666c765e1        4096
+        /Common/4096keypairab1
+87dad403b819cbb0792767b4f695199c        4096
+        /Common/4096keypairab2
+
+
+>> 
 
 
 
