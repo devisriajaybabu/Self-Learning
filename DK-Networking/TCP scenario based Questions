@@ -1,1 +1,42 @@
+✅✅  Q1 : What happens if a TCP packet is lost during transmission?
 
+Best Answer:
+When a TCP packet is lost during transmission, the sender's TCP layer detects this by not receiving an acknowledgment (ACK) for that packet within a specific time frame (called the retransmission timeout). At this point:
+
+The sender retransmits the lost packet automatically.
+TCP’s congestion control mechanism, such as slow start or congestion avoidance, may reduce the data transmission rate to prevent overloading the network.
+The receiver reassembles the packets in the correct order using sequence numbers.
+This mechanism ensures that all data is correctly received and reassembled at the destination.
+
+✅✅ Q2: If a specific host is not reachable and you're seeing dropped packets in network logs, what steps would you take to troubleshoot?
+
+I follow a layered troubleshooting approach.
+Client:      10.1.1.10
+Gateway:     10.1.1.1
+
+Router-1     10.1.10.1
+Router-2     10.1.20.1
+
+Server:      10.10.10.100
+
+🔹 I first validate end-to-end connectivity using ping and measure packet loss and latency.  >> ping 10.10.10.100
+🔹 Then I use traceroute to identify where packets are being dropped.  >> traceroute 10.10.10.100
+            1  10.1.1.1
+            2  10.1.10.1
+            3  10.1.20.1
+            4  * * *   --> Packet dies after router2, Router-2 doesn't know how to reach destination.
+🔹 I verify IP addressing, subnet mask, gateway configuration, ARP entries, and routing tables on both source and destination. 
+     >> ip addr
+     >> route -n
+     >> arp -n
+🔹 Next, I inspect firewalls, ACLs, and security policies that may block traffic.  
+    >> iptables -L -n
+🔹 I perform packet captures using tcpdump or Wireshark to analyze packet flow and verify whether packets are leaving the source and reaching the destination. 
+    >> tcpdump -i eth0 host 10.10.10.100
+🔹 I validate DNS resolution, examine interface statistics for CRC or drop errors, and check device CPU and memory utilization. 
+     >> nslookup app.company.com
+🔹 If the issue is beyond organizational boundaries, I collect packet captures and traceroute evidence and engage the service provider.
+🔹 This systematic approach helps isolate whether the failure is related to connectivity, routing, security policies, DNS, transport protocols, or application behavior.
+✅✅ 
+✅✅ 
+✅✅ 
