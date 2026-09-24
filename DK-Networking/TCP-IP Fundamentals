@@ -1,1 +1,108 @@
+============================================================
+✅✅✅ TCP/IP fundamentals
+============================================================
+✅ Learning path
+
+1. TCP/IP Fundamentals
+        ↓
+2. IP Addressing & Routing
+        ↓
+3. TCP Handshake
+        ↓
+4. UDP vs TCP
+        ↓
+5. Ports & Sockets
+        ↓
+6. MTU & Fragmentation
+        ↓
+7. Flow Control
+        ↓
+8. Congestion Control
+        ↓
+9. Troubleshooting Commands
+        ↓
+10. Packet Analysis using tcpdump/Wireshark
+
+************************************************************
+ ✅✅ TCP/IP fundamentals
+************************************************************
+
+🔹  TCP/IP is a protocal that helps computers to communicate over a network
+🔹  TCP/IP is not a single protocal . It is collection of different protocals like
+   >> UDP, HTTP, HTTPS, TCP, FTP, SSH, ICMP, ARP, DNS
+🔹🔹 1. TCP/IP layer
++--------------------+
+| Application Layer  |
+| HTTP HTTPS DNS SSH |
++--------------------+
+| Transport Layer    |
+| TCP UDP            |
++--------------------+
+| Internet Layer     |
+| IP ICMP            |
++--------------------+
+| Network Layer      |
+| Ethernet ARP       |
++--------------------+
+🔹🔹 2. TCP Three-Way Handshake
+Step 1: SYN   Client starts connection
+Step 2: SYN ACK Server replies
+Step 3: ACK Client sends
+Client                     Server
+
+SYN ----------->
+       <-------- SYN ACK
+
+ACK ----------->
+🔹🔹 Use of Sequence numbers in TCP communication
+Detect loss
+Detect duplicates
+Maintain order
+Retransmit packets
+
+🔹🔹 3. Flow control
+🔹 Sender may be much faster than receiver, sender = 1GB , receiver 100MB
+🔹 To avoid this problem receiver advertise receiver windows ex: 800 bytes, send only 800 bytes and wait for ACK
+    >> Window = 8000 bytes
+🔹 Flow control protects receiver by avoiding congestion control
+
+🔹🔹 4. UDP Vs TCP
+  >> TCP
+      Connection Oriented
+      Reliable
+      Ordered
+      Retransmission
+      Error Recovery
+  >> Example protocals
+     HTTPS, SSH, SMTP , SFTP
+  >> UDP
+      No Connection
+      No ACK
+      No Retransmission
+      Faster
+      Lower Overhead
+🔹🔹 5. Why Ports Exist?
+    >> One machine runs many applications.
+    22    SSH
+    80    HTTP
+    443   HTTPS
+    53    DNS
+    25    SMTP
+🔹🔹 6. Socket
+   >> Socket is a end point of comminucation and is a combination of IP-address and port
+   >> 10.10.10.5:50000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
