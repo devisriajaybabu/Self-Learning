@@ -1,5 +1,88 @@
 LLM ---> Lange Language models
 
-1. Can be usedful for different operations
-    >> Personal Chat boats
-    >> 
+✅✅  Q1 : Q: Can you explain how large language models like GPT work? How do they generate coherent responses?
+A: Large Language Models (LLMs) like GPT are based on transformer architectures. 
+They use attention mechanisms to understand context and relationships between words in a sequence. 
+They are trained on massive datasets containing text data from various sources, learning to predict the most likely next word in a sequence. 
+This predictive capability allows them to generate coherent and meaningful outputs based on the input prompt.
+By understanding the contextual and semantic nuances of language, LLMs can perform tasks such as machine translation, summarization, and question-answering.
+
+
+✅✅  Q2 : Q: You are tasked with gathering and prepping data to train a proprietary LLM for your organization’s domain. What quality checks and preprocessing steps would you incorporate to ensure ethical and effective usage?
+A: First, I’d filter out sensitive, biased, or irrelevant content. 
+Automation, along with human validation, would help ensure high data quality.
+Next, I'd remove duplicates, normalize text, and mask sensitive information (e.g., PII). 
+Finally, I’d include diverse data sources reflecting different perspectives to reduce unintended biases. 
+A close collaboration with domain experts would ensure that the data aligns with our specific requirements.
+
+
+✅✅  Q3 : Our company wants to optimize an open-source LLM to handle customer queries specific to your industry. 
+How would you approach fine-tuning while avoiding overfitting or catastrophic forgetting?
+
+📌Short answer : My approach would be to first validate whether fine-tuning is actually required versus a RAG-based solution.
+If fine-tuning is justified, I would use a parameter-efficient method such as LoRA or QLoRA, train on carefully curated domain data,
+use validation-driven early stopping to prevent overfitting, mix domain and general-purpose datasets to reduce catastrophic forgetting, 
+and measure both domain-specific and general-model performance before production rollout.
+The objective is to improve domain expertise while preserving the pretrained reasoning capabilities of the base model.
+
+📌Long answer :
+🔹 Before deciding to fine-tune, I would first determine whether the business problem requires knowledge injection or behavior adaptation.
+
+🔹 If the objective is simply to answer questions based on frequently changing enterprise documents such as product manuals, policies, or support articles, I would prefer a RAG (Retrieval Augmented Generation) solution instead of fine-tuning.
+
+🔹 If the goal is to make the model understand domain terminology, industry language, response style, and reasoning patterns unique to the organization,
+   then I would proceed with fine-tuning.
+🔹  🔹 Step 1: Select the Right Base Model
+  >> I would start with a strong open-source foundation model .
+🔹  🔹 Step 2: Prepare High-Quality Training Data
+🔹  🔹 Step 3: Use Parameter-Efficient Fine-Tuning LoRA, QLoRA
+🔹  🔹 Step 4: Prevent Overfitting
+  >> Overfitting occurs when the model memorizes training examples instead of learning patterns.
+  >> To avoid this I use below techniques
+    >> 1. Train --> Validate --> test
+    >> 2. Early stopiing : Instead of waiting model to stop at least, if it is not able ti get accurate data stop early
+    >> 3. Diverse Dataset  --> Ensure examples cover:
+
+        Different customer personas
+        Different products
+        Different issue categories
+        Different writing styles
+        This improves generalization.
+🔹  🔹 Step 5: Prevent Catastrophic Forgetting
+  >> Catastrophic forgetting happens when a model learns new information and loses previously learned capabilities.
+  >> Techniques use to avaoid this
+     >> 1. Mixed Training Data , Don't train only on domain data, train general data as well
+     >> 2. Instruction Tuning ---> Include generic instruction, This prevents loss of general-purpose skills.
+
+🔹  🔹 Step 6: Add Human Evaluation
+Automated metrics alone are insufficient.
+
+I would involve:
+
+Subject Matter Experts
+Support Engineers
+Product Specialists
+
+to review outputs for:
+
+Correctness
+Completeness
+Safety
+Compliance
+
+
+✅✅  Q4 : What are fine truning methods LoRA, QLoRA.
+🔹🔹 LoRA : Low Rank Adaption of Large Language Model
+>>  Instead of retraining all the parameters of the model, LoRA freezes the majority of the original model parameters
+and inserts small trainable matrices (low-rank matrices) into specific layers, 
+such as attention layers of a transformer architecture. These matrices are the only ones updated during fine-tuning.
+
+🔹🔹 QLoRA (Quantized LoRA)
+>> How does QLoRA work?
+First, the model's weights are quantized to a lower precision format (e.g., 4-bit or 8-bit).
+During fine-tuning, only LoRA's small trainable parameters are updated.
+The quantized main model is frozen, ensuring both memory savings and the preservation of the pre-trained knowledge.
+
+
+
+
