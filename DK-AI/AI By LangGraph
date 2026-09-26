@@ -6,6 +6,15 @@
 🔹 ✅ Lang Graph : A workflow engine for building Intelligent AI using using LangChain components.
    🔹 LangGrapsh is built for complex, circular workflows that requires loops, reties, multi agents colloboration
 
+🔹 ✅  WHy LangChain is prefered ??
+   🔹 Modularity and Flexibility
+   🔹 Faster developement and prototying
+   🔹 Built-in tools for external integrations Ex: Databases
+   🔹 Memory handling and context aware apps
+   🔹 Decission making agents
+   🔹 Simplifies complex workflow
+   🔹 Active community and opensource
+
 
 🔹 ✅  Components for LangGraph
 🔹 1. State :  It is a shared memory traverse across the flow chart
@@ -22,5 +31,7 @@
 🔹 1. Short term memory
 🔹 2. Long term memory : uses external storage
 🔹 3. Editable memory : It allows to add /update/delete store memory
+
+
 
 
