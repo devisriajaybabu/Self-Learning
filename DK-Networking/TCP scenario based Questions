@@ -59,4 +59,66 @@ If the TTL value becomes zero before reaching its destination, the router discar
 
 This mechanism ensures that packets do not keep circulating indefinitely in the event of a routing loop.
 
-✅✅ 
+✅✅ A user reports intermittent slow performance while connected to a VPN over TCP/IP. How would you debug this issue? 
+🔹 Step 1: Understand the Symptoms
+
+First, I would gather information:
+
+Is the slowness affecting all applications or only specific applications?
+Are all VPN users affected or only one user?
+Does the issue occur at specific times?
+Is performance normal when VPN is disconnected?
+Is the issue occurring over Wi-Fi, Ethernet, or mobile hotspot?
+
+This helps determine whether the problem is:
+
+User-specific
+Site-specific
+Application-specific
+Network-wide
+🔹 Step 2: Check Basic Network Connectivity
+   >> ping <vpn-gateway>
+   >> Look for:
+            Route changes
+            High latency hop
+            Packet drops at intermediate devices
+🔹 "I would troubleshoot systematically by checking latency, packet loss, routing, VPN tunnel health, MTU fragmentation, 
+TCP retransmissions, bandwidth utilization, DNS resolution, and VPN gateway resource usage.
+I would collect packet captures and compare performance inside versus outside the VPN. 
+In my experience, common root causes are MTU mismatches, packet loss, tunnel rekey issues, DNS delays, and VPN gateway CPU saturation.
+
+
+ ✅✅ During load testing of an IoT system, devices connecting via UDP experience large amounts of data loss. How would you troubleshoot this?
+ 🔹 Since UDP is connectionless and does not provide retransmission, flow control, or congestion control, packet loss can occur due to network congestion, device limitations, receiver overload, buffer exhaustion, MTU issues, or infrastructure bottlenecks.
+
+I would troubleshoot systematically from the application layer down to the network layer.
+
+Step 1: Quantify the Problem
+
+First, I would collect metrics:
+
+How much packet loss is occurring?
+Are all devices affected or a subset?
+Does the loss start only under high load?
+Is data loss random or periodic?
+Is loss occurring at the sender, network, or receiver?
+ 🔹
+I would troubleshoot UDP packet loss by identifying where packets are being dropped: sender, network, or receiver. 
+I would analyze interface counters, switch queue statistics, UDP socket buffer errors, CPU and memory utilization, 
+MTU fragmentation, and packets-per-second rates. 
+I would capture traffic using tcpdump/Wireshark, monitor netstat -su for UDP drops, and perform controlled load tests using tools like iperf3.
+In large-scale IoT deployments, common root causes are receiver buffer exhaustion, microburst congestion, overloaded gateways, NIC drops, and UDP fragmentation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
