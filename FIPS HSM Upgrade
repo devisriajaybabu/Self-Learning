@@ -488,7 +488,7 @@ appliance-1#
 >> TACACS config
 system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 config address 10.145.45.205
 system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 tacacs config port 49
-system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 tacacs config secret-key <tacacskey>
+system aaa server-groups server-group tacacs_grp servers server 10.145.45.205 tacacs config secret-key  >> tacacskey`
 system aaa authentication config authentication-method [ TACACS_ALL LOCAL ]
 commit
 
