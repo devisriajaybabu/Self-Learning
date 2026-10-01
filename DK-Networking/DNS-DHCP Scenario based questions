@@ -1,0 +1,36 @@
+
+✅✅ Q1 : Explain the complete DNS Resolution Flow
+Step-by-Step Process in DNS Resolution from the Client to the Server
+Step 1 : Query Initiation by the Client (From browser search www.google.com)
+Step2 : Local Cache Lookup  --> The system first checks its local DNS cache for a cached resolution of the domain name.
+Step3 : Query to the Recursive DNS Resolver  --> The recursive resolver acts as the intermediary for the client and performs the iterative queries needed to resolve the domain name.
+Step 4: Check Recursive Resolver’s Cache  ---> Similar to the client-side cache, the recursive resolver checks its own cache to see if it already has the queried domain’s resolution.
+Step 5:  Query to the Root Name Server ---> The root server helps locate the authoritative name server for the Top-Level Domain (TLD) of the requested domain.
+         Example: If the query is for www.example.com, the root server points to the authoritative server for .com.
+Step 6:  Query to the TLD Name Server
+        After obtaining information from the root name server, the recursive resolver sends the query to the TLD Name Server (e.g., .com name servers).
+Step7 :  Query to the Authoritative Name Server
+        Finally, the recursive resolver queries the Authoritative Name Ser
+
+>> Client Local cache -> Recursive resolver -> Cache check -> Root name server -> TLD name server -> Authoritative name server.
+
+✅✅ Q2 : When a DNS query fails, what would be your approach to troubleshooting?
+🔹 Step1 : Check for basic network connectivity, check mgmt, gateway, prefix
+      >> Ping DSN server --> ping 8.8.8.8
+      >> if ping fails the issue may be network connectivity, routing, VLAN, firewall, or server availability.
+🔹 Step 2: Verify DNS Server Configuration
+     >> cat /etc/resolv.conf  --> Incorrect DNS server configured through DHCP.
+🔹 Step 3:Perform DNS Lookup --> if DNS server could not process request.
+     >> nslookup google.com 
+🔹 Step 4: Check DNS cache issues ---> Sometimes the DNS server was updated but the client still sees the old record because of caching.
+🔹 Step 5: Check DNS Query Path  Using tcpdump
+      Root Server
+      ↓
+      TLD Server
+      ↓
+      Authoritative Server
+      ↓
+      Final Answer
+
+Check Firewall and Security Devices
+
