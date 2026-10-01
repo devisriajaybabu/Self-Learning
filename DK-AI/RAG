@@ -1,0 +1,37 @@
+📌 ✅ ⚠️ 🔍 🔧 🚀 🎯 ⭐ 💡 🌐 🔒
+✅ ✅ ✅  Why we need RAG ??  ---> video to refer : https://www.youtube.com/watch?v=4gQZCtrg-iI&list=PLsBnCMkK2s-GkEYnyXNO8wgzJMzHoBLrX&index=6
+
+Traditional LLM stuggles with
+   ⚠️ Stale Knowledge
+   ⚠️ Hallusination
+   ⚠️ Limited context memory
+ 
+ ✅  Retrieval Arguement Generation
+ 🔹 We can enhance the capabilities of AI models by integrating external knowledge retrieval into the generation process.
+ 🔹 The goal of RAG is to produce more accurate, contextualized, and up-to-date outputs by augmenting generative models with retrieved knowledge from a database or knowledge repository.
+
+📌 Key Components of RAG
+🔹 A. Input Query
+🔹 B. Retriever (Information Retrieval
+     >>  🔹 The query is first processed by the Retriever, which helps search for most relevant and semantically related documents.
+         🔹 Typically, retrieval is done via:
+                 🎯 Embedding : means mathematical representation of words 
+                 🎯 Vector database : designed to store embeddings
+            🔹 Vector Search: Using embeddings to find semantically similar pieces of data.
+
+     User query ---> embedding model --> Vector embedding  ---> Vector database
+🔹 C. Arguementation
+      >> Cleanup and retrive the retrived data
+                 🎯 Filtering 
+                 🎯 Ranking techniques
+                     🔹 Semantic similarity
+                     🔹 Retrival confidence score
+                     🔹 Customized Ranking
+                 🎯 Summarization
+🔹 D. Generation
+      >> The generative AI model (e.g., GPT or any transformer-based model) uses the query and the retrieved knowledge to generate a response.
+         Unlike standalone generative AI, which relies solely on its trained knowledge, RAG supplements it with external information for a more informed and grounded response.
+
+
+🔹 E . Data Injection Pipeline
+                 
