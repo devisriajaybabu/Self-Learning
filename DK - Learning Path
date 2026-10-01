@@ -4,6 +4,62 @@
 🔹 Difference between TLS 1.2 and TLS 1.3.
 🔹 How does DNS resolution work?
 🔹 What causes packet drops?
+
+
+TCP/IP fundamentals
+
+TCP handshake, retransmission, flow/congestion control
+UDP vs TCP
+sockets, ports, MTU, fragmentation
+Troubleshooting with ping, curl, nc, tcpdump, Wireshark
+DNS and DHCP
+
+DNS resolution flow, records, caching, TTL
+DHCP DORA process
+Common DNS/DHCP failure scenarios
+HTTP/HTTPS and TLS
+
+HTTP methods, status codes, headers, keep-alive
+TLS handshake and certificate validation
+TLS vs mTLS
+Certificate expiry, hostname mismatch, CA-chain failures
+L2/L3 networking
+
+Ethernet, ARP, VLANs, trunking
+Switching vs routing
+Subnetting, CIDR, default gateway
+Static and dynamic routing
+NAT and ACLs
+SIP, RTP, and SDP
+
+SIP registration and call setup
+RTP media flow
+SDP offer/answer
+Signaling versus media troubleshooting
+NAT-related VoIP failures
+Cloud and Kubernetes networking
+
+VPC/VNet, subnets, route tables, security groups
+Kubernetes Pods, Services, ClusterIP, NodePort, Ingress
+CoreDNS and NetworkPolicy
+Readiness/liveness probes
+Service-to-service troubleshooting
+Network security
+
+Firewalls and ACLs
+Authentication versus authorization
+Certificates and secrets
+Zero trust concepts
+Threat modeling for network services
+Networking test architecture
+
+Functional, negative, interoperability, performance, resilience, and security tests
+Packet capture and log correlation
+Fault injection and failure isolation
+CI/CD tests for APIs, protocols, and deployments
+
+
+
 ✅✅  Python
 🔹 Decorators?
 🔹 Generators?
