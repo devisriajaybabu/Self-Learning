@@ -46,6 +46,15 @@ Chunking
    >> 3. Overlap managment
    >> 4. Retrival optimization
 
+🔹 Chunking stratagies
+  >> 1. Fixed size chunking
+  >> 2. Recursive chunking
+  >> 3. Semantic Chunking
+  >> 4. Heirarchial Chunking (By maintaining sections)
+  >> 5. Document aware Chunking
+  >> Hybrid Chunking
+  >> Multi model chunking (text, video, audio)
+
 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
 Vector Database
 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
