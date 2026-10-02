@@ -5,8 +5,10 @@ Traditional LLM stuggles with
    ⚠️ Stale Knowledge
    ⚠️ Hallusination
    ⚠️ Limited context memory
- 
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
  ✅  Retrieval Arguement Generation
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
  🔹 We can enhance the capabilities of AI models by integrating external knowledge retrieval into the generation process.
  🔹 The goal of RAG is to produce more accurate, contextualized, and up-to-date outputs by augmenting generative models with retrieved knowledge from a database or knowledge repository.
 
@@ -34,4 +36,44 @@ Traditional LLM stuggles with
 
 
 🔹 E . Data Injection Pipeline
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+Chunking
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+🔹 Chunking should follow below rules
+   >> 1. Each chuck should satisfy token limit
+   >> 2. Semantic coherence
+   >> 3. Overlap managment
+   >> 4. Retrival optimization
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+Vector Database
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+🔹 Vector Search
+   >> In vector search it converts words(test) into numbers
+     [All Is well]   --> embedding technique ----> [0.8, 0.5, 0.1]
+
+🔹 Vector Database
+   >>  🎯 Storage
+      >> Ex : A customer ticket info needs to be stored in vector database
+         Ticket details ---> embedding model ---> vector [0.8, 0.5, 0.1] + Meta data (Customer ID, Prodcut category, Type, content ..etc)
+   >>  🎯 Similarity Search
+         While searching, it uses simantic search to match to vector
+        >> 🔹 Indexing :To make search simpler Vector database used Indexing (Appropriate nearest neighbour search (ANN))
+        >> 🔹 Indexing Techniques:
+             1. 🔹 HNSW (Heairarchial Navigable Small world)
+             2. 🔹 IVF (Clustering)
+             3. 🔹 PQ  
+   >>   🎯Filtering
+
+
+
+
+
+
+
+
+
+
+
                  
