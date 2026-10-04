@@ -1,0 +1,17 @@
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅  MCP
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+ ✅  Tools
+  >> Tools are fundamanetal parts
+  >> Tools involve small part of the task
+
+ ✅  Skills
+   >> To resolve an issue by using Tools
+
+ ✅  MCP (Model context Protocal)
+   >> MCP make sure all skills input/output follows similar methods
+   >> MCP make sure all tools design consistently
+   >>  ✅ User request ---> MCP Client ---> Context request <---> MCP Server <---> Tools  
+                                      <---- Structure response
+User request --> Skill X (Tool1, Tool2) ---> Skill2 (Tool3, Tool4) ---> MCP (Standarad tool)
