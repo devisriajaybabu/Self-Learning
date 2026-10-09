@@ -1,1 +1,56 @@
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅  TLS and HTTPS
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅ Q1 :  A service works by IP address but fails by hostname. How do you investigate?
+>>  1. If a service is reachable using its IP address but not by its hostname, the problem is usually related to DNS resolution, name lookup configuration
+>> 2. Debug in below area
+    >> Step 1: Verify DNS Resolution
+       >> nslookup hostname
+       >> Check Hostname resolves to IP address properly
+    >> Step 2: Test Local Name Resolution
+       >> Check whether the hostname exists in local configuration.
+       >> cat /etc/hosts
+    >> Step 3: Check DNS Server Configuration
+       >> cat /etc/resolv.conf
+    >> Step 4: Compare IP vs Hostname Connectivity
+       >> If the service works through IP:curl http://10.10.10.5
+       >> but fails with hostname : curl -v http://myserver.example.com
+    >> Step 5 : Verify TLS/HTTPS Certificates : For HTTPS services, hostname must match the certificate.
+       >> openssl s_client -connect hostname:443
+    >> Step 6 : Flush DNS Cache : A stale DNS cache may be causing issues.
+    >> Step 7 : Capture Network Traffic , Verify DNS queries and responses.
+        tcpdump -ni any port 53
+
+ ✅ Q2 : A certificate renewal causes failures for only some clients. What is your test plan?
+   >> Example incident : We renewed a public-facing TLS certificate on an API gateway. Modern browsers continued to work, but several Java 8 applications started failing immediately after deployment. 
+Investigation showed the new certificate was issued from a different intermediate CA. The server was sending only the leaf certificate and not the required intermediate certificate.
+Browsers succeeded because they fetched or cached the intermediate automatically, while Java clients could not build the trust chain.
+Using openssl s_client -showcerts, we confirmed the missing intermediate. 
+We restored the correct certificate chain, reloaded the service, 
+and failures dropped from 100% to 0% within minutes. We then added certificate-chain validation as part of the certificate renewal process to prevent recurrence.
+
+ ✅  Debug the issue in below formatted steps
+     >> Step1 : 1. Validate System Time , Check both server and client clocks.
+        >> date
+        >> timedatectl status
+    >> Step2 : Inspect new certificate time period [ Not Before Not After ]
+    >> Step3 : Verify Complete Certificate Chain
+       >> One of the most common causes of partial client failures is a missing intermediate CA certificate.
+       >> openssl s_client -connect server:443 -showcerts
+       >> Questions:
+          Is the intermediate being sent?
+          Did the intermediate change after renewal?
+          Are older clients missing the new intermediate?
+
+  >> Step4 : New certs might generated with new CA, Compare Trust Stores, Some clients may not trust the new issuing CA.
+  >> Step 5 : Verify TLS Compatibility,Test various TLS versions. between TLS 1.2, TLS 1.3
+  >> Summary : My test plan would include validating certificate attributes (SAN, EKU, validity period, issuer),
+verifying the complete certificate chain, checking client trust stores, comparing TLS library versions, confirming time synchronization, 
+testing revocation checking, reproducing failures across representative client types, monitoring TLS handshakes during a staged rollout, 
+and having clear rollback criteria with the previous certificate and chain readily available. 
+This approach quickly isolates whether the issue is due to the certificate itself, trust-chain problems, client compatibility, or environmental factors.
+
+
+
+
 
