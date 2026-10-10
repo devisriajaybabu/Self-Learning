@@ -1,1 +1,90 @@
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅  Dockers
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅  Q1 : A container exits only when traffic increases. How do you investigate?
+    >> ⭐ Determine whether the container is failing because of:
+          Application crash
+          OOM (Out Of Memory) kill
+          Health check failure
+          CPU starvation
+          Resource limits
+          External dependency failures under load
+  >> ⭐ Step 1: Check container state
+         >> docker ps
+        >> docker inspect <container ID>
+  >> ⭐ Step2 : Review docker logs
+        >> docker logs --timestamps <container>
+  >> ⭐ Step 3: Check Docker events 
+        >> docker events
+  >>⭐  Step 4: Check host resource pressure
+        >> free -m, top, vmstat 1
+  >> ⭐ Step 5: Check container resource limits
+
+
+ ✅  Q2 :A service works inside its container but clients on another network cannot reach it. What do you check?
+    >> ⭐ Step 1: Confirm what ‘works inside the container’ means
+        First, I’d verify the service is running, listening on the expected port, and responding:
+        >> docker logs <container>
+           docker exec <container> ss -lntp
+           docker exec <container> curl -v http://localhost:8080
+       >> A successful localhost request only proves the service is accessible within that container’s network namespace.
+   >> Step2 : A common cause is the application listening on 127.0.0.1 instead of 0.0.0.0. For external access through the container interface, 
+       it generally needs to listen on 0.0.0.0:8080 or the appropriate container IP. I’d also check IPv4 versus IPv6 binding.
+
+   >> Step 3 : Check whether the container port is actually published
+      >> For a standard Docker bridge network, exposing a port in the Dockerfile does not make it reachable from outside the host.
+        Check whether the container port is actually published
+        For a standard Docker bridge network, exposing a port in the Dockerfile does not make it reachable from outside the host.
+      >> docker run -p 8080:8080 <image>
+
+        0.0.0.0:8080 allows access through the host’s IPv4 interfaces, subject to firewall rules.
+        127.0.0.1:8080 makes it accessible only from the host itself.
+    Summary : I’d check the application’s bind address, port publication, reachable destination address, firewall rules, and bidirectional
+    routing—in that order—and use progressive tests and packet captures to identify the exact failing boundary.”
+
+
+
+
+ ✅  Q3 : How would you secure a Docker host(Pysical server/VM) running untrusted test workloads?
+  >>  1. Isolate untrusted workloads from valuable infrastructure  -->  I’d prefer a separate ephemeral VM or microVM per job 
+  >> 2. Harden and minimize the host 
+        >> Host controls would include:
+
+            1. Minimal installed packages and services.
+            2. Restricted administrative access through a management network.
+            3. Strong authentication and least-privilege administration.
+            4. SELinux or AppArmor in enforcing mode.
+            5. Centralized security logs that workloads cannot modify.
+            6. No broad cloud instance permissions.
+>> 3. Protect the Docker daemon
+      >> Access to a rootful Docker socket is effectively root access to the host.
+
+        I would:
+        Never mount /var/run/docker.sock into untrusted containers.
+        Restrict membership in the docker group.
+        Avoid exposing the Docker API over the network; if necessary, use authenticated, encrypted access with authorization controls.
+        Keep workload users away from the runtime’s control plane.
+>> Summary : My summary would be: use a disposable isolation boundary appropriate to the threat, minimize container privileges, 
+deny unnecessary network and host access, bound resource consumption, and keep credentials and control-plane services out of reach. 
+For truly hostile workloads, I would not rely on ordinary Docker containers alone.”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
