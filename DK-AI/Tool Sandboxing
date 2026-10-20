@@ -1,1 +1,16 @@
 
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ ✅  Tool Sandboxing
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+ 🔹 Sandboxes are isolated enviroments, that allows agents to safely execute potentially risky operations like running arbitary code, interacting with file systems without effeting the main infra
+
+   >> Ex : Dockers
+        Instances
+        Sandbox services 
+        Langsmith sandbox
+        Virtual machine
+
+ 🔹  Trusted commands
+    >> permissions.yaml  ---> can define bash trusted commands like create, touch, cd, ls, 
+ 🔹 Langsmith sandbox
+ 🔹 Human in the loop
